@@ -41,11 +41,14 @@
         %th{"data-field" => "description"} Description
     %tbody
       - @maps.each do |name, level|
-        - tempest = @tempests[@tempests.keys.sample]
+        - tempest = @active_tempests[name]
         %tr
           %td= "#{titleize(name)} (#{level})"
           %td= tempest[:name]
           %td
-            = tempest[:monster_bonus]
-            %br
-            = tempest[:player_bonus]
+            - if tempest[:message]
+              = tempest[:message]
+            - else
+              = tempest[:monster_bonus]
+              %br
+              = tempest[:player_bonus]
