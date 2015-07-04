@@ -39,4 +39,19 @@
       $(document).ready(function() {
         $('select').material_select();
         $('ul.tabs').tabs();
+        reportForm = $('#report form') ;
+        reportForm.submit(function(e) {
+          e.preventDefault();
+
+          if (reportForm.serializeArray().length != 2) {
+            return;
+          }
+
+          $.post('api/vote',
+            reportForm.serialize(),
+            function(data) {
+              reportForm[0].reset();
+              $('#reported').openModal();
+            });
+        });
       });
