@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %title Tempest Watch
+    %link{type: 'text/css', rel: 'stylesheet', href: 'css/materialize.min.css',  media:'screen,projection'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+  %body
+    %header
+      %nav
+        .nav-wrapper.container
+          %a.brand-logo{:href => "#"} Tempest Watch
+    %main
+      .container
+        = yield
+
+    %footer.page-footer
+      .container
+        .row
+          .col.l6.s12
+            %p.grey-text.text-lighten-4
+              This site is fan-made and is not affiliated with Grinding Gear Games in any way.
+            %p.grey-text.text-lighten-4
+              Developed by Justin Vanderheide
+            %p.grey-text.text-lighten-4
+              Contribute on
+              %a.blue-text.text-darken-3{href: 'https://github.com/jayvan/tempest-watch'} GitHub
+          .col.l6.s12
+            %h5.white-text Built with
+            %ul
+              %li
+                %a.blue-text.text-darken-3{:href => 'http://www.sinatrarb.com/'} Sinatra
+              %li
+                %a.blue-text.text-darken-3{:href => 'http://materializecss.com/'} Materialize
+
+    %script{type: 'text/javascript', src: 'js/jquery-2.1.4.min.js'}
+    %script{type: 'text/javascript', src: 'js/materialize.min.js'}
+
+    :javascript
+      $(document).ready(function() {
+        $('select').material_select();
+        $('ul.tabs').tabs();
+      });

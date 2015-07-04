@@ -1,0 +1,301 @@
+.row
+  .col.s12
+    %ul.tabs
+      %li.tab.col.s6
+        %a{href: '#maps'} Maps
+      %li.tab.col.s6
+        %a{href: '#report'} Report
+#report
+  .row
+    %form.col.s12{action: 'api/vote', method: 'post'}
+      .input-field.col.s12
+        %select
+          %option{value: 'Crypt'} Crypt Map (66)
+          %option{value: 'Dried'} Dried Lake Map (66)
+          %option{value: 'Dunes'} Dunes Map (66)
+          %option{value: 'Dungeon'} Dungeon Map (66)
+          %option{value: 'Grotto'} Grotto Map (66)
+          %option{value: 'Overgrown'} Overgrown Ruin Map (66)
+          %option{value: 'Tropical'} Tropical Island Map (66)
+          %option{value: 'Arcade'} Arcade Map (67)
+          %option{value: 'Arsenal'} Arsenal Map (67)
+          %option{value: 'Cemetery'} Cemetery Map (67)
+          %option{value: 'Mountain'} Mountain Ledge Map (67)
+          %option{value: 'Sewer'} Sewer Map (67)
+          %option{value: 'Thicket'} Thicket Map (67)
+          %option{value: 'Wharf'} Wharf Map (67)
+          %option{value: 'Ghetto'} Ghetto Map (68)
+          %option{value: 'Mud'} Mud Geyser Map (68)
+          %option{value: 'Reef'} Reef Map (68)
+          %option{value: 'Spider'} Spider Lair Map (68)
+          %option{value: 'Springs'} Springs Map (68)
+          %option{value: 'Vaal'} Vaal Pyramid Map (68)
+          %option{value: 'Catacomb'} Catacomb Map (69)
+          %option{value: 'Overgrown'} Overgrown Shrine Map (69)
+          %option{value: 'Promenade'} Promenade Map (69)
+          %option{value: 'Shore'} Shore Map (69)
+          %option{value: 'Spider'} Spider Forest Map (69)
+          %option{value: 'Tunnel'} Tunnel Map (69)
+          %option{value: 'Bog'} Bog Map (70)
+          %option{value: 'Coves'} Coves Map (70)
+          %option{value: 'Graveyard'} Graveyard Map (70)
+          %option{value: 'Pier'} Pier Map (70)
+          %option{value: 'Underground'} Underground Sea Map (70)
+          %option{value: 'Arachnid'} Arachnid Nest Map (71)
+          %option{value: 'Colonnade'} Colonnade Map (71)
+          %option{value: 'Dry'} Dry Woods Map (71)
+          %option{value: 'Strand'} Strand Map (71)
+          %option{value: 'Temple'} Temple Map (71)
+          %option{value: 'Jungle'} Jungle Valley Map (72)
+          %option{value: 'Torture'} Torture Chamber Map (72)
+          %option{value: 'Waste'} Waste Pool Map (72)
+          %option{value: 'Mine'} Mine Map (72)
+          %option{value: 'Dry'} Dry Peninsula Map (73)
+          %option{value: 'Canyon'} Canyon Map (73)
+          %option{value: 'Cells'} Cells Map (73)
+          %option{value: 'Dark'} Dark Forest Map (73)
+          %option{value: 'Gorge'} Gorge Map (74)
+          %option{value: 'Maze'} Maze Map (74)
+          %option{value: 'Underground'} Underground River Map (74)
+          %option{value: 'Bazaar'} Bazaar Map (75)
+          %option{value: 'Necropolis'} Necropolis Map (75)
+          %option{value: 'Plateau'} Plateau Map (75)
+          %option{value: 'Crematorium'} Crematorium Map (76)
+          %option{value: 'Precinct'} Precinct Map (76)
+          %option{value: 'Shipyard'} Shipyard Map (77)
+          %option{value: 'Shrine'} Shrine Map (77)
+        %label Map
+      .input-field.col.s12
+        %select
+          %option{value: 'fire'} Fire Tempest
+          %option{value: 'water'} Water Tempest
+          %option{value: 'lightning'} Lightning Tempest
+          %option{value: 'riches'} Tempest of Riches
+        %label Tempest
+      .input-field.col.s12
+        %button.btn.waves-effect.waves-light{type: 'submit', name: 'action'}
+          Send
+#maps
+  %table
+    %thead
+      %tr
+        %th{"data-field" => "map"} Map
+        %th{"data-field" => "tempest"} Tempest
+        %th{"data-field" => "description"} Description
+    %tbody
+      %tr
+        %td Crypt Map (66)
+        %td Fire
+        %td Monsters deal 65% additional damage as fire
+      %tr
+        %td Dried Lake Map (66)
+        %td Bounty
+        %td 65% increased item rarity
+      %tr
+        %td Dunes Map (66)
+        %td Unknown
+        %td
+      %tr
+        %td Dungeon Map (66)
+        %td None
+        %td
+      %tr
+        %td Grotto Map (66)
+        %td Water
+        %td Monsters deal 55% additional damage as water
+      %tr
+        %td Overgrown Ruin Map (66)
+        %td Haste
+        %td 30% increased movement speed
+      %tr
+        %td Tropical Island Map (66)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Arcade Map (67)
+        %td None
+        %td
+      %tr
+        %td Arsenal Map (67)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Cemetery Map (67)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Mountain Ledge Map (67)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Sewer Map (67)
+        %td None
+        %td
+      %tr
+        %td Thicket Map (67)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Wharf Map (67)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Ghetto Map (68)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Mud Geyser Map (68)
+        %td None
+        %td
+      %tr
+        %td Reef Map (68)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Spider Lair Map (68)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Springs Map (68)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Vaal Pyramid Map (68)
+        %td None
+        %td
+      %tr
+        %td Catacomb Map (69)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Overgrown Shrine Map (69)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Promenade Map (69)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Shore Map (69)
+        %td None
+        %td
+      %tr
+        %td Spider Forest Map (69)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Tunnel Map (69)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Bog Map (70)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Coves Map (70)
+        %td None
+        %td
+      %tr
+        %td Graveyard Map (70)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Pier Map (70)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Underground Sea Map (70)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Arachnid Nest Map (71)
+        %td None
+        %td
+      %tr
+        %td Colonnade Map (71)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Dry Woods Map (71)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Strand Map (71)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Temple Map (71)
+        %td None
+        %td
+      %tr
+        %td Jungle Valley Map (72)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Torture Chamber Map (72)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Waste Pool Map (72)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Mine Map (72)
+        %td None
+        %td
+      %tr
+        %td Dry Peninsula Map (73)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Canyon Map (73)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Cells Map (73)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Dark Forest Map (73)
+        %td None
+        %td
+      %tr
+        %td Gorge Map (74)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Maze Map (74)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Underground River Map (74)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Bazaar Map (75)
+        %td None
+        %td
+      %tr
+        %td Necropolis Map (75)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Plateau Map (75)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Crematorium Map (76)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Precinct Map (76)
+        %td None
+        %td
+      %tr
+        %td Shipyard Map (77)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
+      %tr
+        %td Shrine Map (77)
+        %td Fire
+        %td Monsters deal 15% additional fire damage
