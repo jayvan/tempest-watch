@@ -27,7 +27,7 @@ class TempestWatch < Sinatra::Base
     # Returns the current tempest for a map
     # The current tempest is considered the one with the most votes
     def tempest_for_map(map)
-      tempest_name = $redis.zrevrangebyscore(map_key(map), '+inf', '-inf', :limit => [0, 1])[0]
+      tempest_name = $redis.zrevrangebyscore(map_key(map), '+inf', '2', :limit => [0, 1])[0]
       tempest_name ||= 'unknown'
       return TEMPESTS[tempest_name]
     end
