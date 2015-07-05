@@ -14,8 +14,8 @@
       .input-field.col.s12
         %select{name: 'map'}
           %option{value: '', disabled: true, selected: true}
-          - @maps.each do |name, level|
-            %option{value: name}= "#{titleize(name)} (#{level})"
+          - @maps.each do |map|
+            %option{value: map.name}= "#{titleize(map.name)} (#{map.level})"
         %label Map
       .input-field.col.s12
         %select{name: 'tempest'}
@@ -50,10 +50,10 @@
         %th{"data-field" => "tempest"} Tempest
         %th{"data-field" => "description"} Description
     %tbody
-      - @maps.each do |name, level|
-        - tempest = @active_tempests[name]
+      - @maps.each do |map|
+        - tempest = map.tempest
         %tr
-          %td= "#{titleize(name)} (#{level})"
+          %td= "#{titleize(map.name)} (#{map.level})"
           %td= tempest[:name]
           %td
             - if tempest[:message]
