@@ -13,12 +13,34 @@ class TempestWatch < Sinatra::Base
       title.to_s.split('_').map(&:capitalize).join(' ')
     end
 
+    # Returns the number of seconds left until tempests move
+    def seconds_to_reset
+      (59 - Time.now.min) * 60 + (60 - Time.now.sec)
+    end
+
+    # Returns the redis key for a map
+    # The keys rotate each hour to clear the votes
+    def map_key(map)
+      "#{map}_#{Time.now.utc.hour}"
+    end
+
+    # Returns the current tempest for a map
+    # The current tempest is considered the one with the most votes
     def tempest_for_map(map)
-      tempest_name = $redis.zrevrangebyscore(map, '+inf', '-inf', :limit => [0, 1])[0]
+      tempest_name = $redis.zrevrangebyscore(map_key(map), '+inf', '-inf', :limit => [0, 1])[0]
       tempest_name ||= 'unknown'
       return TEMPESTS[tempest_name]
     end
 
+    # Add a vote for the tempest being active on the given map
+    # Increments the tempests counter in the maps SortedSet
+    def vote_for_tempest(map, tempest)
+      redis_key = map_key(map)
+      $redis.zincrby(redis_key, 1, tempest)
+      $redis.expire(redis_key, 3600)
+    end
+
+    # Returns the current tempests for all maps
     def all_tempests
       tempests = MAPS.map do |name, level|
         [name, tempest_for_map(name)]
@@ -43,7 +65,7 @@ class TempestWatch < Sinatra::Base
       status 400
       body "Tempest #{params[:tempest]} does not exist"
     else
-      $redis.zincrby(params[:map], 1, params[:tempest])
+      vote_for_tempest(params[:map], params[:tempest])
       200
     end
   end

@@ -36,6 +36,13 @@
       %a.modal-action.modal-close.btn-flat{href: '#!'} Close
 
 #maps
+  .row
+    .col.s12
+      %h3.center-align
+        Tempests move in
+        = succeed ':' do
+          %span#minutes-left 5
+        %span#seconds-left> 23
   %table
     %thead
       %tr

@@ -39,9 +39,12 @@
 
     :javascript
       $(document).ready(function() {
+        // Setup materialize nonsense
         $('select').material_select();
         $('ul.tabs').tabs();
-        reportForm = $('#report form') ;
+
+        // Set up the report form the use XHR
+        var reportForm = $('#report form') ;
         reportForm.submit(function(e) {
           e.preventDefault();
 
@@ -55,5 +58,24 @@
               reportForm[0].reset();
               $('#reported').openModal();
             });
+        });
+
+        var minuteSpan = $('#minutes-left');
+        var secondSpan = $('#seconds-left');
+
+        // Set up the countdown
+        var resetTime = new Date(Date.now() + #{seconds_to_reset * 1000});
+        var timerUpdate = setInterval(function() {
+          var secondsToReset = Math.floor((resetTime - Date.now()) / 1000);
+          if (secondsToReset < 0) {
+            window.location.reload();
+            clearInterval(timerUpdate);
+            return;
+          }
+          var minutesLeft = Math.floor(secondsToReset / 60);
+          var secondsLeft = secondsToReset - minutesLeft * 60;
+          var secondsLeftPadded = ("0" + secondsLeft).slice(-2);
+          minuteSpan.text(minutesLeft);
+          secondSpan.text(secondsLeftPadded);
         });
       });
