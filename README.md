@@ -40,6 +40,8 @@ Contributions to this project are always welcome. If you have a great idea that 
 Collaborations are great too, if you are thinking of making a tool that interacts with Tempest Tracker (e.g. an AutoHotkey macro), and need a new API or feature open an issue and I'll get it added.
 
 ## API
+Until we know exactly how tempests work, expect there to be some changes to the API including the routes and the return formats. If you are working on tools that integrate with tempest-watch just be aware these are subject to change until a few days after the awakening has released!
+
 #### Vote
 __POST: http://poetempest.com/api/vote__
 
