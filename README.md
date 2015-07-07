@@ -95,7 +95,7 @@ __GET: http://poetempest.com/api/v0/maps__
 ```
 
 #### Current Tempests
-__GET: http://poetempest.com/api/v0/current\_tempests__
+__GET: http://poetempest.com/api/v0/current_tempests__
 ```json
 {
   "crypt": {
@@ -121,7 +121,7 @@ __GET: http://poetempest.com/api/v0/current\_tempests__
 ```
 
 #### Current Tempest for Single Map
-__GET: http://poetempest.com/api/v0/current\_tempests/:map__
+__GET: http://poetempest.com/api/v0/current_tempests/:map__
 ```json
 {
   "name": "Jumbo Obscuring Tempest of Mediocrity",
