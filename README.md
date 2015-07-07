@@ -59,26 +59,26 @@ Params:
 __GET: http://poetempest.com/api/tempests__
 ```json
 {
-  bases: {
-    none: {
-      name: "None",
-      message: "No tempest is active in this area"
+  "bases": {
+    "none": {
+      "name": "None",
+      "message": "No tempest is active in this area"
     },
-    static: {
-      name: "Static Tempest",
-      monster_bonus: "25% decreased lightning resistance",
-      player_bonus: "25% increased lightning damage"
+    "static": {
+      "name": "Static Tempest",
+      "monster_bonus": "25% decreased lightning resistance",
+      "player_bonus": "25% increased lightning damage"
     }
   },
-  prefixes: {
-    none: "",
-    jumbo: "50% increased area of effect for tempests",
-    mini: "50% decreased area of effect for tempests"
+  "prefixes": {
+    "none": "",
+    "jumbo": "50% increased area of effect for tempests",
+    "mini": "50% decreased area of effect for tempests"
   },
-  suffixes: {
-    none: "",
-    intensity: "50% increased duration of tempests",
-    mediocrity: "50% decreased duration of tempests"
+  "suffixes": {
+    "none": "",
+    "intensity": "50% increased duration of tempests",
+    "mediocrity": "50% decreased duration of tempests"
   }
 }
 ```
@@ -87,10 +87,10 @@ __GET: http://poetempest.com/api/tempests__
 __GET: http://poetempest.com/api/maps__
 ```json
 {
-  crypt: 68,
-  desert: 68,
-  dunes: 68,
-  dungeon: 68
+  "crypt": 68,
+  "desert": 68,
+  "dunes": 68,
+  "dungeon": 68
 }
 ```
 
@@ -98,24 +98,24 @@ __GET: http://poetempest.com/api/maps__
 __GET: http://poetempest.com/api/current\_tempests__
 ```json
 {
-  crypt: {
-    name: "Jumbo Obscuring Tempest of Mediocrity",
-    base: {
-      name: "Obscuring Tempest",
-      monster_bonus: "Monsters are blinded for 3 seconds",
-      player_bonus: "Players are blinded for 3 seconds"
+  "crypt": {
+    "name": "Jumbo Obscuring Tempest of Mediocrity",
+    "base": {
+      "name": "Obscuring Tempest",
+      "monster_bonus": "Monsters are blinded for 3 seconds",
+      "player_bonus": "Players are blinded for 3 seconds"
     },
-    prefix: "50% increased area of effect for tempests",
-    suffix: "50% decreased duration of tempests"
+    "prefix": "50% increased area of effect for tempests",
+    "suffix": "50% decreased duration of tempests"
   },
-  desert: {
-    name: "Unknown",
-    base: {
-      name: "Unknown",
-      message: "If you enter this map please report which tempest is active"
+  "desert": {
+    "name": "Unknown",
+    "base": {
+      "name": "Unknown",
+      "message": "If you enter this map please report which tempest is active"
     },
-    prefix: "",
-    suffix: ""
+    "prefix": "",
+    "suffix": ""
   }
 }
 ```
@@ -124,13 +124,13 @@ __GET: http://poetempest.com/api/current\_tempests__
 __GET: http://poetempest.com/api/current\_tempests/:map__
 ```json
 {
-  name: "Jumbo Obscuring Tempest of Mediocrity",
-  base: {
-    name: "Obscuring Tempest",
-    monster_bonus: "Monsters are blinded for 3 seconds",
-    player_bonus: "Players are blinded for 3 seconds"
+  "name": "Jumbo Obscuring Tempest of Mediocrity",
+  "base": {
+    "name": "Obscuring Tempest",
+    "monster_bonus": "Monsters are blinded for 3 seconds",
+    "player_bonus": "Players are blinded for 3 seconds"
   },
-  prefix: "50% increased area of effect for tempests",
-  suffix: "50% decreased duration of tempests"
+  "prefix": "50% increased area of effect for tempests",
+  "suffix": "50% decreased duration of tempests"
 }
 ```
