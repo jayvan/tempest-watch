@@ -2,11 +2,14 @@ require 'haml'
 require 'json'
 require 'redis'
 require 'sinatra'
+require "sinatra/namespace"
 
 require './map.rb'
 require './tempest.rb'
 
 class TempestWatch < Sinatra::Base
+ register Sinatra::Namespace
+
   configure do
     $redis = Redis.new
   end
@@ -39,51 +42,53 @@ class TempestWatch < Sinatra::Base
     haml :index
   end
 
-  post '/api/vote' do
-    map = Map.get(params[:map])
-    if map.nil?
-      status 400
-      body "Map #{params[:map]} does not exist"
-    elsif Tempest::BASES[params[:base]].nil?
-      status 400
-      body "Tempest #{params[:base]} does not exist"
-    elsif params[:prefix] && Tempest::PREFIXES[params[:prefix]].nil?
-      status 400
-      body "Prefix #{params[:prefix]} does not exist"
-    elsif params[:suffix] && Tempest::SUFFIXES[params[:suffix]].nil?
-      status 400
-      body "Suffix #{params[:suffix]} does not exist"
-    else
-      tempest = Tempest.new(params[:base], params[:prefix], params[:suffix])
-      map.report_tempest(tempest)
-      200
+  namespace '/api/v0' do
+    post '/vote' do
+      map = Map.get(params[:map])
+      if map.nil?
+        status 400
+        body "Map #{params[:map]} does not exist"
+      elsif Tempest::BASES[params[:base]].nil?
+        status 400
+        body "Tempest #{params[:base]} does not exist"
+      elsif params[:prefix] && Tempest::PREFIXES[params[:prefix]].nil?
+        status 400
+        body "Prefix #{params[:prefix]} does not exist"
+      elsif params[:suffix] && Tempest::SUFFIXES[params[:suffix]].nil?
+        status 400
+        body "Suffix #{params[:suffix]} does not exist"
+      else
+        tempest = Tempest.new(params[:base], params[:prefix], params[:suffix])
+        map.report_tempest(tempest)
+        200
+      end
     end
-  end
 
-  get '/api/tempests' do
-    return {
-      bases: Tempest::BASES,
-      prefixes: Tempest::PREFIXES,
-      suffixes: Tempest::SUFFIXES
-    }.to_json
-  end
+    get '/tempests' do
+      return {
+        bases: Tempest::BASES,
+        prefixes: Tempest::PREFIXES,
+        suffixes: Tempest::SUFFIXES
+      }.to_json
+    end
 
-  get '/api/maps' do
-    Map::LEVELS.to_json
-  end
+    get '/maps' do
+      Map::LEVELS.to_json
+    end
 
-  get '/api/current_tempests' do
-    return current_tempests.to_json
-  end
+    get '/current_tempests' do
+      return current_tempests.to_json
+    end
 
-  get '/api/current_tempests/:map' do
-    map = Map.get(params[:map])
-    if map.nil?
-      status 400
-      body "Map #{params[:map]} does not exist"
-    else
-      status 200
-      body map.tempest.to_json
+    get '/current_tempests/:map' do
+      map = Map.get(params[:map])
+      if map.nil?
+        status 400
+        body "Map #{params[:map]} does not exist"
+      else
+        status 200
+        body map.tempest.to_json
+      end
     end
   end
 end
