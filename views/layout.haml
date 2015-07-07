@@ -48,10 +48,11 @@
         reportForm.submit(function(e) {
           e.preventDefault();
 
-          if (reportForm.serializeArray().length != 2) {
+          if (reportForm.serializeArray().length != 4) {
             return;
           }
 
+          debugger
           $.post('api/vote',
             reportForm.serialize(),
             function(data) {

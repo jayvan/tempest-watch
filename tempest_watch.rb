@@ -33,7 +33,9 @@ class TempestWatch < Sinatra::Base
 
   get '/' do
     @maps = Map.get_all
-    @tempests = Tempest::BASES
+    @tempest_bases = Tempest::BASES
+    @tempest_prefixes = Tempest::PREFIXES
+    @tempest_suffixes = Tempest::SUFFIXES
     haml :index
   end
 
@@ -42,20 +44,39 @@ class TempestWatch < Sinatra::Base
     if map.nil?
       status 400
       body "Map #{params[:map]} does not exist"
-    elsif Tempest.get(params[:tempest]).nil?
+    elsif Tempest::BASES[params[:base]].nil?
       status 400
-      body "Tempest #{params[:tempest]} does not exist"
+      body "Tempest #{params[:base]} does not exist"
+    elsif params[:prefix] && Tempest::PREFIXES[params[:prefix]].nil?
+      status 400
+      body "Prefix #{params[:prefix]} does not exist"
+    elsif params[:suffix] && Tempest::SUFFIXES[params[:suffix]].nil?
+      status 400
+      body "Suffix #{params[:suffix]} does not exist"
     else
-      map.report_tempest(params[:tempest])
+      tempest = Tempest.new(params[:base], params[:prefix], params[:suffix])
+      map.report_tempest(tempest)
       200
     end
   end
 
   get '/api/tempests' do
+    return {
+      bases: Tempest::BASES,
+      prefixes: Tempest::PREFIXES,
+      suffixes: Tempest::SUFFIXES
+    }.to_json
+  end
+
+  get '/api/maps' do
+    Map::LEVELS.to_json
+  end
+
+  get '/api/current_tempests' do
     return current_tempests.to_json
   end
 
-  get '/api/tempests/:map' do
+  get '/api/current_tempests/:map' do
     map = Map.get(params[:map])
     if map.nil?
       status 400

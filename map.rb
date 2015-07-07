@@ -1,7 +1,7 @@
 require './tempest.rb'
 
 class Map
-  attr_accessor :name, :level
+  attr_accessor :name, :level, :tempest
 
   def self.get(name)
     return nil if LEVELS[name].nil?
@@ -17,24 +17,38 @@ class Map
   def initialize(name, level)
     @name = name
     @level = level
+    tempest_base = $redis.zrevrangebyscore(base_redis_key, '+inf', '2', :limit => [0, 1])[0]
+    tempest_prefix = $redis.zrevrangebyscore(prefix_redis_key, '+inf', '2', :limit => [0, 1])[0]
+    tempest_suffix = $redis.zrevrangebyscore(suffix_redis_key, '+inf', '2', :limit => [0, 1])[0]
+    @tempest = Tempest.new(tempest_base, tempest_prefix, tempest_suffix)
   end
 
-  def redis_key
-    "#{@name}_#{Time.now.utc.hour}"
+  def base_redis_key
+    "#{@name}_base_#{Time.now.utc.hour}"
   end
 
-  def tempest
-    tempest_name = $redis.zrevrangebyscore(redis_key, '+inf', '2', :limit => [0, 1])[0]
-    tempest_name ||= 'unknown'
-    Tempest.get(tempest_name)
+  def prefix_redis_key
+    "#{@name}_prefix_#{Time.now.utc.hour}"
+  end
+
+  def suffix_redis_key
+    "#{@name}_suffix_#{Time.now.utc.hour}"
   end
 
   # Add a vote for the tempest being active on the given map
   # Increments the tempests counter in the maps SortedSet
   def report_tempest(tempest)
-    key = redis_key
-    $redis.zincrby(key, 1, tempest)
-    $redis.expire(key, 3600)
+    base_key = base_redis_key
+    $redis.zincrby(base_key, 1, tempest.base_name)
+    $redis.expire(base_key, 3600)
+
+    prefix_key = prefix_redis_key
+    $redis.zincrby(prefix_key, 1, tempest.prefix_name)
+    $redis.expire(prefix_key, 3600)
+
+    suffix_key = suffix_redis_key
+    $redis.zincrby(suffix_key, 1, tempest.suffix_name)
+    $redis.expire(suffix_key, 3600)
   end
 
   LEVELS = {
