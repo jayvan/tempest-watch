@@ -40,7 +40,7 @@ Contributions to this project are always welcome. If you have a great idea that 
 Collaborations are great too, if you are thinking of making a tool that interacts with Tempest Tracker (e.g. an AutoHotkey macro), and need a new API or feature open an issue and I'll get it added.
 
 ## API
-Until we know exactly how tempests work, expect there to be some changes to the API including the routes and the return formats. If you are working on tools that integrate with tempest-watch just be aware these are subject to change until a few days after the awakening has released!
+The API is not final. Until we know exactly how tempests work, expect there to be some changes to the API including the routes and the return formats. If you are working on tools that integrate with tempest-watch just be aware these are subject to change until a few days after the awakening has released!
 
 #### Vote
 __POST: http://poetempest.com/api/vote__
@@ -49,37 +49,88 @@ Params:
 ```json
 {
   "map": "dried_lake",
-  "tempest": "bounty"
+  "base": "static",
+  "prefix": "jumbo",
+  "suffix": "intensity"
 }
 ```
 
-#### All Maps
+#### Retrieve all tempest bases, prefixes, and suffixes
 __GET: http://poetempest.com/api/tempests__
 ```json
 {
-  "crypt":{
-    "name":"Tempest of Bounty",
-    "monster_bonus":"50% increased number of items dropped",
-    "player_bonus":"50% increased rarity of items obtained"
+  bases: {
+    none: {
+      name: "None",
+      message: "No tempest is active in this area"
+    },
+    static: {
+      name: "Static Tempest",
+      monster_bonus: "25% decreased lightning resistance",
+      player_bonus: "25% increased lightning damage"
+    }
   },
-  "dungeon":{
-    "name":"None",
-    "message":"No tempest is active in this area"
+  prefixes: {
+    none: "",
+    jumbo: "50% increased area of effect for tempests",
+    mini: "50% decreased area of effect for tempests"
   },
-  "grotto":{
-    "name":"Unknown",
-    "message":"If you enter this map please report which tempest is active"
+  suffixes: {
+    none: "",
+    intensity: "50% increased duration of tempests",
+    mediocrity: "50% decreased duration of tempests"
   }
 }
 ```
-#### Single Map
-__GET: http://poetempest.com/api/tempests/:map__
 
-Map is the downcased name of the map, with spaces converted to underscores, .e.g 'Tropical Island' becomes `tropical_island`
+#### Retrieve all maps
+__GET: http://poetempest.com/api/maps__
 ```json
 {
-  "name":"Tempest of Bounty",
-  "monster_bonus":"50% increased number of items dropped",
-  "player_bonus":"50% increased rarity of items obtained"
+  crypt: 68,
+  desert: 68,
+  dunes: 68,
+  dungeon: 68
+}
+```
+
+#### Current Tempests
+__GET: http://poetempest.com/api/current\_tempests__
+```json
+{
+  crypt: {
+    name: "Jumbo Obscuring Tempest of Mediocrity",
+    base: {
+      name: "Obscuring Tempest",
+      monster_bonus: "Monsters are blinded for 3 seconds",
+      player_bonus: "Players are blinded for 3 seconds"
+    },
+    prefix: "50% increased area of effect for tempests",
+    suffix: "50% decreased duration of tempests"
+  },
+  desert: {
+    name: "Unknown",
+    base: {
+      name: "Unknown",
+      message: "If you enter this map please report which tempest is active"
+    },
+    prefix: "",
+    suffix: ""
+  }
+}
+```
+
+#### Current Tempest for Single Map
+__GET: http://poetempest.com/api/current\_tempests/:map__
+```json
+{
+  name: "Jumbo Obscuring Tempest of Mediocrity",
+  base: {
+    name: "Obscuring Tempest",
+    monster_bonus: "Monsters are blinded for 3 seconds",
+    player_bonus: "Players are blinded for 3 seconds"
+  },
+  prefix: "50% increased area of effect for tempests",
+  suffix: "50% decreased duration of tempests"
 }
 ```
