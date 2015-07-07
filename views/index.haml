@@ -18,12 +18,23 @@
             %option{value: map.name}= "#{titleize(map.name)} (#{map.level})"
         %label Map
       .input-field.col.s12
-        %select{name: 'tempest'}
+        %select{name: 'base'}
           %option{value: '', disabled: true, selected: true}
-          - @tempests.each do |key, tempest|
-            - next if key == :unknown
-            %option{value: key}= tempest[:name]
+          - @tempest_bases.each do |key, base|
+            %option{value: key}= base[:name]
         %label Tempest
+      .input-field.col.s12
+        %select{name: 'prefix'}
+          %option{value: '', disabled: true, selected: true}
+          - @tempest_prefixes.each do |key, prefix|
+            %option{value: key}= key.capitalize
+        %label Prefix
+      .input-field.col.s12
+        %select{name: 'suffix'}
+          %option{value: '', disabled: true, selected: true}
+          - @tempest_suffixes.each do |key, suffix|
+            %option{value: key}= key.capitalize
+        %label Suffix
       .input-field.col.s12
         %button.btn.waves-effect.waves-light{type: 'submit', name: 'action'}
           Send
@@ -54,14 +65,8 @@
         - tempest = map.tempest
         %tr
           %td= "#{titleize(map.name)} (#{map.level})"
-          %td= tempest[:name]
-          %td
-            - if tempest[:message]
-              = tempest[:message]
-            - else
-              = tempest[:monster_bonus]
-              %br
-              = tempest[:player_bonus]
+          %td= tempest.name
+          %td= tempest.description
 
 #more
   %p
