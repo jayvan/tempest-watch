@@ -10,7 +10,7 @@
 
 #report
   .row
-    %form.col.s12{action: 'api/vote', method: 'post', 'data-remote' => true}
+    %form.col.s12{action: 'api/v0/vote', method: 'post', 'data-remote' => true}
       .input-field.col.s12
         %select{name: 'map'}
           %option{value: '', disabled: true, selected: true}

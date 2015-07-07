@@ -53,8 +53,7 @@
             return;
           }
 
-          debugger
-          $.post('api/vote',
+          $.post('api/v0/vote',
             reportForm.serialize(),
             function(data) {
               reportForm[0].reset();
