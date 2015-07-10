@@ -21,14 +21,8 @@
         %select{name: 'base'}
           %option{value: '', disabled: true, selected: true}
           - @tempest_bases.each do |key, base|
-            %option{value: key}= base[:name]
-        %label Tempest
-      .input-field.col.s12
-        %select{name: 'prefix'}
-          %option{value: '', disabled: true, selected: true}
-          - @tempest_prefixes.each do |key, prefix|
             %option{value: key}= titleize(key)
-        %label Prefix
+        %label Tempest
       .input-field.col.s12
         %select{name: 'suffix'}
           %option{value: '', disabled: true, selected: true}

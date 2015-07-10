@@ -6,265 +6,88 @@ class Tempest
     @prefix_name = prefix || 'none'
     @suffix_name = suffix || 'none'
     @base = BASES[base] || UNKNOWN_BASE
-    @prefix = PREFIXES[@prefix_name]
     @suffix = SUFFIXES[@suffix_name]
 
-    @name = @base[:name]
-    @name = "#{@prefix_name.capitalize} #{@name}" if @prefix_name != 'none'
+    @name = @base_name.capitalize
+    @name = "#{@name} Tempest" if @name != 'None'
     @name = "#{@name} of #{@suffix_name.capitalize}" if @suffix_name != 'none'
 
-    if @base[:message]
-      @description = @base[:message]
-    else
-      @description = [@base[:player_bonus], @base[:monster_bonus], @prefix, @suffix].compact.join(', ')
-    end
+    @description = "#{@base}. #{@suffix}"
   end
 
   def to_json(options = nil)
     return {
-      name: @name,
+      name: @base_name,
       base: @base,
-      prefix: @prefix,
       suffix: @suffix
     }.to_json(options)
   end
 
-  UNKNOWN_BASE = {
-    name: 'Unknown',
-    message: 'If you enter this map please report which tempest is active'
-  }
+  UNKNOWN_BASE = 'If you enter this map please report which tempest is active'
 
   BASES = {
-    'none' => {
-      name: 'None',
-      message: 'No tempest is active in this area'
-    },
-    'abyssal' => {
-      name: 'Abyssal Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'arctic' => {
-      name: 'Arctic Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'battering' => {
-      name: 'Battering Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'blasphemous' => {
-      name: 'Blasphemous Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'brisk' => {
-      name: 'Brisk Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'consuming' => {
-      name: 'Consuming Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'corrupting' => {
-      name: 'Corrupting Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'crushing' => {
-      name: 'Crushing Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'divine' => {
-      name: 'Divine Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'echoing' => {
-      name: 'Echoing Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'electrocuting' => {
-      name: 'Electrocuting Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'energising' => {
-      name: 'Energising Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'enlarging' => {
-      name: 'Enlarging Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'ethereal' => {
-      name: 'Ethereal Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'freezing' => {
-      name: 'Freezing Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'galvanizing' => {
-      name: 'Galvanizing Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'gathering' => {
-      name: 'Gathering Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'ghastly' => {
-      name: 'Ghastly Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'glacial' => {
-      name: 'Glacial Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'impure' => {
-      name: 'Impure Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'infernal' => {
-      name: 'Infernal Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'molten' => {
-      name: 'Molten Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'morbid' => {
-      name: 'Morbid Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'obscuring' => {
-      name: 'Obscuring Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'quickening' => {
-      name: 'Quickening Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'radiating' => {
-      name: 'Radiating Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'refining' => {
-      name: 'Refining Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'restorative' => {
-      name: 'Restorative Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'scathing' => {
-      name: 'Scathing Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'seething' => {
-      name: 'Seething Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'sharding' => {
-      name: 'Sharding Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'shielding' => {
-      name: 'Shielding Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'shimmering' => {
-      name: 'Shimmering Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'shining' => {
-      name: 'Shining Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'shivering' => {
-      name: 'Shivering Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'shrinking' => {
-      name: 'Shrinking Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'static' => {
-      name: 'Static Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'stinging' => {
-      name: 'Stinging Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'transmogrifying' => {
-      name: 'Transmogrifying Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    },
-    'veiling' => {
-      name: 'Veiling Tempest',
-      player_bonus: 'Unknown effect',
-      monster_bonus: ''
-    }
-  }
-
-  PREFIXES = {
-    'none' => ''
+    'none' => 'No tempest is active in this area',
+    'abyssal' => '100% of damage is converted to chaos damage',
+    'arctic' => 'Casts vaal ice nova, vaal cold snap, frost wall, ice storm, frost bite, lacial cascade and summons an ice golem',
+    'battering' => 'Casts rockstorm, spinestorm, shockwave, sandstorm, and ground slam',
+    'blasphemous' => 'Casts curses',
+    'brisk' => '20% chance to dodge atacks, 20% chance to dodge spell damage',
+    'corrupting' => 'Corrupted drops',
+    'crushing' => 'Casts vulnerability, spinestorm, rockstorm, shockwave, sandstorm, and ground slam',
+    'divine' => 'Cannot be damaged',
+    'echoing' => 'Skills repeat an additional time',
+    'electrocuting' => 'Casts shock nova, lightning storm, conductivity, ball lightning, vaal storm call, vaal spark and summons storms',
+    'energising' => 'Gain charges',
+    'enlarging' => '30% increased character size, 30% increased maximum life, 50% increased damage',
+    'ethereal' => 'Your movement is not blocked by enemies, 25% chance to dodge attacks, 25% chance to dodge spell damage',
+    'freezing' => '100% reduced movement, cast, and attack speed',
+    'galvanizing' => '50% of physical damage converted to lightning damage, 50% increase lightning damage, always shock',
+    'ghastly' => 'SUmmons skeletons, raising spirits, and casts desecrate',
+    'glacial' => 'Causes an ice nova, cold snap, frost wall, ice storm, glacial cascade, and summons an ice golem',
+    'impure' => 'Taking elemental damage heals you instead',
+    'infernal' => 'Causes a firestorm, burning ground, explosion, and fire nova. Casts flammability, and summons flame golems and flame totems.',
+    'molten' => 'Causes a firestorm, burning ground, fire nova, and summons flame totems and flame golems',
+    'morbid' => 'Summons vaal skeletons, raging spirits, and casts desecrate',
+    'obscuring' => 'Creates a cloud of smoke that blinds enemies and gives a temporary buff to movement speed',
+    'quickening' => '30% increased attack speed, 30% increased cast speed, 30% increased movement speed',
+    'radiating' => '1200% increased rarity of items found, 600% increased quantity of items found',
+    'refining' => 'Quality drops',
+    'restorative' => '10% of Mana Regenerated per second, 10% of Life regenerated per second',
+    'scathing' => 'All hits are Critical Strikes, extra gore',
+    'seething' => '50% of physical damage converted to fire damage, 50% increased fire damage, always ignite',
+    'sharding' => '4 additional projectiles, 30%increased radius of area skills',
+    'shielding' => 'Grants a proximity shield that blocks projectiles',
+    'shimmering' => '+1000 to maximum energy shield, energy shield recharge not delayed by damage',
+    'shining' => '600% increased rarity of items found, 300% increase quantity of items found',
+    'shivering' => '50% of physical damage converted to cold damage, 50% increased cold damage, always freeze',
+    'shrinking' => '30% reduced character size, 30% reduced maximum life, 50% reduced damage',
+    'static' => 'Casts shock nova, lightning storm, ball lightning, and summons storms',
+    'stinging' => 'All hits are Critical Strikes',
+    'transmogrifying' => 'Drops items as their sell price',
+    'veiling' => 'Elemental resistances are zero, 40% reduced light radius',
   }
 
   SUFFIXES = {
     'none' => '',
-    'aberrance' => 'Unknown suffix effect',
-    'animation' => 'Tempest strikes animate nearby weapons',
-    'catalysm' => 'Unknown suffix effect',
-    'desperation' => 'Unknown suffix effect',
-    'destiny' => 'Unknown suffix effect',
-    'fate' => 'Unknown suffix effect',
-    'fire' => 'Tempest strikes leave burning ground',
-    'fortune' => 'Unknown suffix effect',
-    'ice' => 'Tempest strikes leave chilling ground',
-    'influence' => 'Unknown suffix effect',
-    'inspiration' => 'Unknown suffix effect',
-    'intensity' => 'Unknown suffix effect',
-    'lightning' => 'Tempest strikes leave shocking ground',
-    'phantoms' => 'Tempest strikes turn nearby corpses into apparitions',
-    'poison' => 'Tempest strikes leave a poison cloud',
-    'precision' => 'Unknown suffix effect',
-    'revelation' => 'Unknown suffix effect',
-    'the_ancestors' => 'Tempest strikes summon totems',
-    'turmoil' => 'Unknown suffix effect'
+    'aberrance' => 'Rare monsters each have a nemesis mod, magic monster packs each have a bloodline mod',
+    'angling' => '50% increased fish school size',
+    'animation' => 'Nearby weapons are animated',
+    'catalysm' => '50% reduced tempest lifetime, 30% increased tempst frequency',
+    'desperation' => '40% increased tempest buff duration when on low life',
+    'destiny' => 'Random monster drops a map',
+    'fate' => 'Random monster drops a vaal fragment',
+    'fire' => 'Area has patches of burning ground, +25% monster fire resistance',
+    'fortune' => 'Random monster drops a unique item',
+    'ice' => 'Area has patched of chilled ground, +25% monster cold resistance',
+    'influence' => '50% increased tempest area of effect',
+    'inspiration' => '15% increased experience gian',
+    'intensity' => '35% increased tempest frequency, 25% reduced tempest buff duration',
+    'lightning' => 'Area has patches of shocking ground, +25% monster lightning resistance',
+    'phantoms' => 'Area is haunted by 10 additional tormented spirits',
+    'poison' => 'Area has patches of desecrated ground, monsters poison on hit',
+    'precision' => '30% reduced tempest area of effect, 25% increased tempest frequency',
+    'revelation' => '50% increased experience gain',
+    'the_ancestors' => 'Area contains many totems',
+    'turmoil' => 'Area is inhabited by 20 additional rogue exiles'
   }
 end

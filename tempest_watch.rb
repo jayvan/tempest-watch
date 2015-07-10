@@ -37,7 +37,6 @@ class TempestWatch < Sinatra::Base
   get '/' do
     @maps = Map.get_all
     @tempest_bases = Tempest::BASES
-    @tempest_prefixes = Tempest::PREFIXES
     @tempest_suffixes = Tempest::SUFFIXES
     haml :index
   end
@@ -51,9 +50,6 @@ class TempestWatch < Sinatra::Base
       elsif Tempest::BASES[params[:base]].nil?
         status 400
         body "Tempest #{params[:base]} does not exist"
-      elsif params[:prefix] && Tempest::PREFIXES[params[:prefix]].nil?
-        status 400
-        body "Prefix #{params[:prefix]} does not exist"
       elsif params[:suffix] && Tempest::SUFFIXES[params[:suffix]].nil?
         status 400
         body "Suffix #{params[:suffix]} does not exist"
@@ -67,7 +63,6 @@ class TempestWatch < Sinatra::Base
     get '/tempests' do
       return {
         bases: Tempest::BASES,
-        prefixes: Tempest::PREFIXES,
         suffixes: Tempest::SUFFIXES
       }.to_json
     end
