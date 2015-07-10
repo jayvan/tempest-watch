@@ -37,7 +37,12 @@ class Map
 
   # Add a vote for the tempest being active on the given map
   # Increments the tempests counter in the maps SortedSet
-  def report_tempest(tempest)
+  def report_tempest(tempest, voter, seconds_to_reset)
+    voter_key = "#{@name}::#{voter}"
+    return if $redis.exists voter_key
+    $redis.set voter_key, 1
+    $redis.expire voter_key, seconds_to_reset
+
     base_key = base_redis_key
     $redis.zincrby(base_key, 1, tempest.base_name)
     $redis.expire(base_key, 3600)

@@ -55,7 +55,7 @@ class TempestWatch < Sinatra::Base
         body "Suffix #{params[:suffix]} does not exist"
       else
         tempest = Tempest.new(params[:base], params[:prefix], params[:suffix])
-        map.report_tempest(tempest)
+        map.report_tempest(tempest, request.ip, seconds_to_reset)
         200
       end
     end
