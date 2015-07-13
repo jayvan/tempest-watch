@@ -16,7 +16,7 @@ class Tempest
 
   def to_json(options = nil)
     return {
-      name: @base_name,
+      name: @name,
       base: @base,
       suffix: @suffix
     }.to_json(options)

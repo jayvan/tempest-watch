@@ -14,14 +14,10 @@ You can also use this tool to help complete the challenges involving tempests!
 - Lists each map with it's currently active tempest
 - Lets you report tempests you encounter so other players can know
 
-### Features required by Awakening
-- Clear the tempest data hourly since the tempests move
-
 ### Potential Features
-- Require more than 1 vote for a tempest before it is listed. This would make tempest locations take a while longer to display, but when they do display, we would have higher confidence in them.
-- Limit the number of times a single IP address can vote. This would prevent a single player from purposely misreporting tempests to tamper with the data
 - Logging of most common/least common tempests so we can determine how likely each tempest is
 - AutoHotkey macro that fetches the tempest for the map under your cursor and displays it in a tooltip
+- In game bot that you can report tempests to
 
 ## Installation
 ### Pre-requisites
@@ -50,35 +46,24 @@ Params:
 {
   "map": "dried_lake",
   "base": "static",
-  "prefix": "jumbo",
   "suffix": "intensity"
+  "[api_key]": "Not required. Used to bypass API limits. Contact me if you need one."
 }
 ```
 
-#### Retrieve all tempest bases, prefixes, and suffixes
+#### Retrieve all tempest bases and suffixes
 __GET: http://poetempest.com/api/v0/tempests__
 ```json
 {
   "bases": {
-    "none": {
-      "name": "None",
-      "message": "No tempest is active in this area"
-    },
-    "static": {
-      "name": "Static Tempest",
-      "monster_bonus": "25% decreased lightning resistance",
-      "player_bonus": "25% increased lightning damage"
-    }
-  },
-  "prefixes": {
-    "none": "",
-    "jumbo": "50% increased area of effect for tempests",
-    "mini": "50% decreased area of effect for tempests"
+    "abyssal": "100% of damage is converted to chaos damage",
+    "arctic": "Casts vaal ice nova, vaal cold snap, frost wall, ice storm, frost bite, lacial cascade and summons an ice golem",
+    "blasphemous": "Casts curses"
   },
   "suffixes": {
-    "none": "",
-    "intensity": "50% increased duration of tempests",
-    "mediocrity": "50% decreased duration of tempests"
+    "aberrance": "Rare monsters each have a nemesis mod, magic monster packs each have a bloodline mod",
+    "angling": "50% increased fish school size",
+    "animation": "Nearby weapons are animated"
   }
 }
 ```
@@ -99,22 +84,13 @@ __GET: http://poetempest.com/api/v0/current_tempests__
 ```json
 {
   "crypt": {
-    "name": "Jumbo Obscuring Tempest of Mediocrity",
-    "base": {
-      "name": "Obscuring Tempest",
-      "monster_bonus": "Monsters are blinded for 3 seconds",
-      "player_bonus": "Players are blinded for 3 seconds"
-    },
-    "prefix": "50% increased area of effect for tempests",
-    "suffix": "50% decreased duration of tempests"
+    "name": "Abyssal Tempest of Animation",
+    "base": "100% of damage is converted to chaos damage",
+    "suffix": "Nearby weapons are animated"
   },
   "desert": {
-    "name": "Unknown",
-    "base": {
-      "name": "Unknown",
-      "message": "If you enter this map please report which tempest is active"
-    },
-    "prefix": "",
+    "name": "unknown",
+    "base": "If you enter this map please report which tempest is active",
     "suffix": ""
   }
 }
@@ -124,13 +100,8 @@ __GET: http://poetempest.com/api/v0/current_tempests__
 __GET: http://poetempest.com/api/v0/current_tempests/:map__
 ```json
 {
-  "name": "Jumbo Obscuring Tempest of Mediocrity",
-  "base": {
-    "name": "Obscuring Tempest",
-    "monster_bonus": "Monsters are blinded for 3 seconds",
-    "player_bonus": "Players are blinded for 3 seconds"
-  },
-  "prefix": "50% increased area of effect for tempests",
-  "suffix": "50% decreased duration of tempests"
+  "name": "Abyssal Tempest of Animation",
+  "base": "100% of damage is converted to chaos damage",
+  "suffix": "Nearby weapons are animated"
 }
 ```
