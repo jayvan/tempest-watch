@@ -54,8 +54,15 @@ class TempestWatch < Sinatra::Base
         status 400
         body "Suffix #{params[:suffix]} does not exist"
       else
-        tempest = Tempest.new(params[:base], params[:prefix], params[:suffix])
-        map.report_tempest(tempest, request.ip, seconds_to_reset)
+        skip_validation = params[:api_key] && ($redis.exists "apikey::#{params[:api_key]}")
+        if params[:api_key] && !skip_validation
+          status 400
+          body "Invalid api key: #{params[:api_key]}"
+          return
+        end
+
+        tempest = Tempest.new(params[:base], params[:suffix])
+        map.report_tempest(tempest, request.ip, seconds_to_reset, skip_validation)
         200
       end
     end

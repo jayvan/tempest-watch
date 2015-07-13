@@ -17,18 +17,13 @@ class Map
   def initialize(name, level)
     @name = name
     @level = level
-    tempest_base = $redis.zrevrangebyscore(base_redis_key, '+inf', '2', :limit => [0, 1])[0]
-    tempest_prefix = $redis.zrevrangebyscore(prefix_redis_key, '+inf', '2', :limit => [0, 1])[0]
-    tempest_suffix = $redis.zrevrangebyscore(suffix_redis_key, '+inf', '2', :limit => [0, 1])[0]
-    @tempest = Tempest.new(tempest_base, tempest_prefix, tempest_suffix)
+    tempest_base = $redis.zrevrangebyscore(base_redis_key, '+inf', '1', :limit => [0, 1])[0]
+    tempest_suffix = $redis.zrevrangebyscore(suffix_redis_key, '+inf', '1', :limit => [0, 1])[0]
+    @tempest = Tempest.new(tempest_base, tempest_suffix)
   end
 
   def base_redis_key
     "#{@name}_base_#{Time.now.utc.hour}"
-  end
-
-  def prefix_redis_key
-    "#{@name}_prefix_#{Time.now.utc.hour}"
   end
 
   def suffix_redis_key
@@ -37,19 +32,17 @@ class Map
 
   # Add a vote for the tempest being active on the given map
   # Increments the tempests counter in the maps SortedSet
-  def report_tempest(tempest, voter, seconds_to_reset)
-    voter_key = "#{@name}::#{voter}"
-    return if $redis.exists voter_key
-    $redis.set voter_key, 1
-    $redis.expire voter_key, seconds_to_reset
+  def report_tempest(tempest, voter, seconds_to_reset, skip_validation = false)
+    unless skip_validation
+      voter_key = "#{@name}::#{voter}"
+      return if $redis.exists voter_key
+      $redis.set voter_key, 1
+      $redis.expire voter_key, seconds_to_reset
+    end
 
     base_key = base_redis_key
     $redis.zincrby(base_key, 1, tempest.base_name)
     $redis.expire(base_key, 3600)
-
-    prefix_key = prefix_redis_key
-    $redis.zincrby(prefix_key, 1, tempest.prefix_name)
-    $redis.expire(prefix_key, 3600)
 
     suffix_key = suffix_redis_key
     $redis.zincrby(suffix_key, 1, tempest.suffix_name)

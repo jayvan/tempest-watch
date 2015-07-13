@@ -1,9 +1,8 @@
 class Tempest
-  attr_accessor :name, :description, :base_name, :prefix_name, :suffix_name
+  attr_accessor :name, :description, :base_name, :suffix_name
 
-  def initialize(base, prefix, suffix)
+  def initialize(base, suffix)
     @base_name = base || 'unknown'
-    @prefix_name = prefix || 'none'
     @suffix_name = suffix || 'none'
     @base = BASES[base] || UNKNOWN_BASE
     @suffix = SUFFIXES[@suffix_name]
