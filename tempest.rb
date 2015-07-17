@@ -22,6 +22,16 @@ class Tempest
     }.to_json(options)
   end
 
+  def type
+    if %w(radiating shining).include? @base_name || @suffix_name == 'turmoil'
+      'great'
+    elsif %w(abyssal).include? @base_name #TODO: Add more dangerous tempests here
+      'dangerous'
+    else
+      ''
+    end
+  end
+
   UNKNOWN_BASE = 'If you enter this map please report which tempest is active'
 
   BASES = {
@@ -41,7 +51,7 @@ class Tempest
     'ethereal' => 'Your movement is not blocked by enemies, 25% chance to dodge attacks, 25% chance to dodge spell damage',
     'freezing' => '100% reduced movement, cast, and attack speed',
     'galvanizing' => '50% of physical damage converted to lightning damage, 50% increase lightning damage, always shock',
-    'ghastly' => 'SUmmons skeletons, raising spirits, and casts desecrate',
+    'ghastly' => 'Summons skeletons, raising spirits, and casts desecrate',
     'glacial' => 'Causes an ice nova, cold snap, frost wall, ice storm, glacial cascade, and summons an ice golem',
     'impure' => 'Taking elemental damage heals you instead',
     'infernal' => 'Causes a firestorm, burning ground, explosion, and fire nova. Casts flammability, and summons flame golems and flame totems.',

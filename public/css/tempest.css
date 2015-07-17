@@ -1,3 +1,41 @@
+html { 
+}
+
 header {
   margin-bottom: 10px;
+}
+
+nav {
+  background-color: #333333;
+}
+
+#maps {
+  background-color: #FFFFFF;
+  background: url(/images/poe_awakening.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#maps th,
+#maps td {
+  padding: 10px 20px;
+}
+
+#maps tr {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+#maps tr:nth-child(2n) {
+  background-color: rgba(0, 0, 0, 0.0);
+} 
+
+.dangerous {
+  background-color: rgba(240, 5, 17, 0.2);
+}
+.great {
+  background-color: rgba(127, 242, 38, 0.2);
+}
+.none {
+  background-color: rgba(220, 220, 220, 0.6);
 }
