@@ -1,21 +1,13 @@
-html { 
-}
-
 header {
   margin-bottom: 10px;
 }
 
-nav {
+nav, footer.page-footer {
   background-color: #333333;
 }
 
 #maps {
   background-color: #FFFFFF;
-  background: url(/images/poe_awakening.png) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 
 th,
@@ -26,16 +18,19 @@ td {
 tr {
   background-color: rgba(0, 0, 0, 0.05);
 }
+
 tr:nth-child(2n) {
   background-color: rgba(0, 0, 0, 0.0);
-} 
+}
 
-.dangerous {
-  background-color: rgba(240, 5, 17, 0.2) !important;
+tr.dangerous {
+  background-color: rgba(240, 5, 17, 0.2);
 }
-.great {
-  background-color: rgba(127, 242, 38, 0.2) !important;
+
+tr.great {
+  background-color: rgba(127, 242, 38, 0.3);
 }
-.none {
-  background-color: rgba(0, 0, 0, 0.2) !important;
+
+tr.none {
+  background-color: rgba(0, 0, 0, 0.2);
 }
