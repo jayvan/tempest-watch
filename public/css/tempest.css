@@ -18,24 +18,24 @@ nav {
   background-size: cover;
 }
 
-#maps th,
-#maps td {
+th,
+td {
   padding: 10px 20px;
 }
 
-#maps tr {
+tr {
   background-color: rgba(0, 0, 0, 0.05);
 }
-#maps tr:nth-child(2n) {
+tr:nth-child(2n) {
   background-color: rgba(0, 0, 0, 0.0);
 } 
 
 .dangerous {
-  background-color: rgba(240, 5, 17, 0.2);
+  background-color: rgba(240, 5, 17, 0.2) !important;
 }
 .great {
-  background-color: rgba(127, 242, 38, 0.2);
+  background-color: rgba(127, 242, 38, 0.2) !important;
 }
 .none {
-  background-color: rgba(220, 220, 220, 0.6);
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
