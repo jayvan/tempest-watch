@@ -23,9 +23,13 @@ class Tempest
   end
 
   def type
-    if %w(radiating shining).include? @base_name || @suffix_name == 'turmoil'
+    if %w(radiating shining corrupting).include? @base_name
       'great'
-    elsif %w(abyssal).include? @base_name #TODO: Add more dangerous tempests here
+    elsif %w(destiny fate fortune phantoms).include? @suffix_name
+      'great'
+    elsif %w(abyssal).include? @base_name
+      'dangerous'
+    elsif %w(aberrance).include? @suffix_name
       'dangerous'
     else
       ''

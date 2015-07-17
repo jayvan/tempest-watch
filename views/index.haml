@@ -57,7 +57,7 @@
     %tbody
       - @maps.each do |map|
         - tempest = map.tempest
-        %tr{:class => "#{tempest.type} #{tempest.name.underscore}"}
+        %tr{:class => tempest.type}
           %td= "#{titleize(map.name)} (#{map.level})"
           %td= tempest.name
           %td= tempest.description
