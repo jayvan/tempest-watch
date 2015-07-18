@@ -60,6 +60,7 @@ class Map
     'aqueduct' => 69,
     'arcade' => 69,
     'cemetery' => 69,
+    'channel' => 69,
     'mountain_ledge' => 69,
     'sewer' => 69,
     'thicket' => 69,
