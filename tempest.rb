@@ -45,6 +45,7 @@ class Tempest
     'battering' => 'Casts various physical spells',
     'blasphemous' => 'Casts curses',
     'brisk' => '25% chance to dodge atacks, 25% chance to dodge spell damage',
+    'consuming' => 'Gain souleater (5% atk speed, 5% cast speed, 5% damage reduction on kill)',
     'corrupting' => 'Corrupted drops',
     'crushing' => 'Casts various physical spells',
     'divine' => 'Cannot be damaged',
