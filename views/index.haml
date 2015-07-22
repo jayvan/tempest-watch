@@ -44,12 +44,12 @@
   %table
     %thead
       %tr
-        %th{'data-field' => 'agree'} Agree
-        %th{'data-field' => 'disagree'} Disagree
+        %th{'data-field' => 'agree'}
+        %th{'data-field' => 'disagree'}
         %th{'data-field' => 'map'} Map
-        %th
+        %th.hide-on-small-and-down
         %th{'data-field' => 'tempest'} Tempest
-        %th{'data-field' => 'description'} Description
+        %th.hide-on-small-and-down{'data-field' => 'description'} Description
     %tbody
       - @maps.each do |map|
         - tempest = map.tempest
@@ -64,11 +64,11 @@
                 %i.material-icons thumb_down
           %td
             = "#{titleize(map.name)} (#{map.level})"
-          %td
+          %td.hide-on-small-and-down
             - if tempest.votes > 0
               %span.votes= tempest.votes
           %td= tempest.name
-          %td= tempest.description
+          %td.hide-on-small-and-down= tempest.description
 
 #more
   %p
