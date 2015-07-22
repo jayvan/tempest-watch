@@ -67,6 +67,7 @@
             });
         });
 
+        var refreshHeader = $('#countdown')
         var minuteSpan = $('#minutes-left');
         var secondSpan = $('#seconds-left');
 
@@ -75,7 +76,13 @@
         var timerUpdate = setInterval(function() {
           var secondsToReset = Math.floor((resetTime - Date.now()) / 1000);
           if (secondsToReset < 0) {
-            window.location.reload();
+            // Refresh 0-10 seconds from now to distribute reloads
+            // Otherwise every connected browsers hits the server simultaneously
+            window.setTimeout(function() {
+              window.location.reload();
+            }, Math.random() * 10000);
+
+            refreshHeader.text('Refreshing...');
             clearInterval(timerUpdate);
             return;
           }
