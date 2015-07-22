@@ -9,13 +9,14 @@
     %meta{name: 'description', content: 'Path of Exile tempest tempest tracker. See what tempests are in each map and report tempest sightings'}
   %body
     %header
-      %nav
-        .nav-wrapper.container
-          %a.brand-logo{:href => "#"} Tempest Watch
-          %ul.right.hide-on-small-and-down
-            %li
-              %a{href: '.'}
-                %i.material-icons refresh
+      .navbar-fixed
+        %nav
+          .nav-wrapper.container
+            %a.brand-logo{:href => "#"} Tempest Watch
+            %ul.right.hide-on-small-and-down
+              %li
+                %a{href: '.'}
+                  %i.material-icons refresh
     %main
       .container
         = yield
