@@ -17,9 +17,8 @@ class Map
   def initialize(name, level)
     @name = name
     @level = level
-    minimum_votes = ENV['RACK_ENV'] == 'production' ? 2 : 1
-    tempest_base, votes = $redis.zrevrangebyscore(base_redis_key, '+inf', minimum_votes, :limit => [0, 1],:withscores => true)[0]
-    tempest_suffix = $redis.zrevrangebyscore(suffix_redis_key, '+inf', minimum_votes, :limit => [0, 1])[0]
+    tempest_base, votes = $redis.zrevrangebyscore(base_redis_key, '+inf', 1, :limit => [0, 1],:withscores => true)[0]
+    tempest_suffix = $redis.zrevrangebyscore(suffix_redis_key, '+inf', 1, :limit => [0, 1])[0]
     @tempest = Tempest.new(tempest_base, tempest_suffix, (votes || 0).round)
   end
 
