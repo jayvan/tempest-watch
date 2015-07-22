@@ -50,21 +50,46 @@
         $('select').material_select();
         $('ul.tabs').tabs();
 
-        // Set up the report form the use XHR
         var reportForm = $('#report form') ;
+
+        window.vote = function(map, base, suffix) {
+          $.post('api/v0/vote',
+            { map: map, base: base, suffix: suffix },
+            function(data) {
+              reportForm[0].reset();
+              $('ul.tabs').tabs('select_tab', 'maps');
+              // Babysit materialize >_>
+              $('select').material_select('destroy');
+              $('.caret').remove();
+              $('select').material_select();
+              Materialize.toast('Thank you, your tempest sighting has been logged.', 4000)
+            });
+        };
+
+        window.downvote = function(map, base, suffix) {
+          $('#report form [name=map]').val(map)
+          $('#report form [name=base]').val(base)
+          $('#report form [name=suffix]').val(suffix)
+
+          // Babysit materialize >_>
+          $('select').material_select('destroy');
+          $('.caret').remove();
+          $('select').material_select();
+
+          $('ul.tabs').tabs('select_tab', 'report');
+          Materialize.toast('Please select the correct tempest and send the report.', 4000)
+        };
+
         reportForm.submit(function(e) {
           e.preventDefault();
 
           if (reportForm.serializeArray().length != 3) {
             return;
           }
-
-          $.post('api/v0/vote',
-            reportForm.serialize(),
-            function(data) {
-              reportForm[0].reset();
-              $('#reported').openModal();
-            });
+          var map = $('#report form [name=map]').val()
+          var base = $('#report form [name=base]').val()
+          var suffix = $('#report form [name=suffix]').val()
+          vote(map, base, suffix)
         });
 
         var refreshHeader = $('#countdown')

@@ -34,3 +34,7 @@ tr.great {
 tr.none {
   background-color: rgba(0, 0, 0, 0.2);
 }
+
+.toast {
+  background-color: #2bbbad;
+}
