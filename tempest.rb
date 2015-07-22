@@ -1,11 +1,12 @@
 class Tempest
-  attr_accessor :name, :description, :base_name, :suffix_name
+  attr_accessor :name, :description, :base_name, :suffix_name, :votes
 
-  def initialize(base, suffix)
+  def initialize(base, suffix, votes = 0)
     @base_name = base || 'unknown'
     @suffix_name = suffix || 'none'
     @base = BASES[base] || UNKNOWN_BASE
     @suffix = SUFFIXES[@suffix_name]
+    @votes = votes
 
     @name = @base_name.capitalize
     @name = "#{@name} Tempest" if @name != 'None'

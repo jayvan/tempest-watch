@@ -38,3 +38,13 @@ tr.none {
 .toast {
   background-color: #2bbbad;
 }
+
+.votes {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #26a69a;
+  border-radius: 2px;
+  padding: 0.1rem 0.5rem;
+  font-weight: bold;
+}

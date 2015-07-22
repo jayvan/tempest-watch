@@ -47,6 +47,7 @@
         %th{'data-field' => 'agree'} Agree
         %th{'data-field' => 'disagree'} Disagree
         %th{'data-field' => 'map'} Map
+        %th
         %th{'data-field' => 'tempest'} Tempest
         %th{'data-field' => 'description'} Description
     %tbody
@@ -61,7 +62,11 @@
             - if tempest.base_name != 'unknown'
               %a{onclick: "downvote('#{map.name}','#{tempest.base_name}','#{tempest.suffix_name}')"}
                 %i.material-icons thumb_down
-          %td= "#{titleize(map.name)} (#{map.level})"
+          %td
+            = "#{titleize(map.name)} (#{map.level})"
+          %td
+            - if tempest.votes > 0
+              %span.votes= tempest.votes
           %td= tempest.name
           %td= tempest.description
 
