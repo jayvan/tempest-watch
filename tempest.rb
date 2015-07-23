@@ -1,5 +1,5 @@
 class Tempest
-  attr_accessor :name, :description, :base_name, :suffix_name, :votes
+  attr_accessor :name, :description, :base_name, :suffix_name, :votes, :base, :suffix
 
   def initialize(base, suffix, votes = 0)
     @base_name = base || 'unknown'

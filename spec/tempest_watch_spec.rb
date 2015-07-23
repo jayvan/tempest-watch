@@ -31,18 +31,91 @@ describe "TempestWatch" do
         expect(@parsed_body['bases'].empty?).to be(false)
       end
 
-      it "should have a name for each tempest" do
-        @parsed_body['bases'].each do |name, tempest|
-          expect(tempest['name']).to_not be_nil
-        end
+      it "should return the list of tempest suffixes" do
+        expect(@parsed_body['suffixes'].empty?).to be(false)
+      end
+    end
+
+    describe "GET /api/v0/current_tempests" do
+      before(:all) do
+        get '/api/v0/current_tempests'
+        @parsed_body = JSON.parse(last_response.body)
+        @test_map = 'crypt'
       end
 
-      it "should return the list of tempest prefixes" do
-        expect(@parsed_body['prefixes'].empty?).to be(false)
+      it "should respond to GET /" do
+        expect(last_response).to be_ok
+      end
+
+      it "should have the name of active tempests" do
+        expect(@parsed_body[@test_map]['name']).to_not be_nil
+      end
+
+      it "should have the base of active tempests" do
+        expect(@parsed_body[@test_map]['base']).to_not be_nil
+      end
+
+      it "should have the suffix of active tempests" do
+        expect(@parsed_body[@test_map]['suffix']).to_not be_nil
+      end
+
+      it "should not have anything else" do
+        expect(@parsed_body[@test_map].keys.length).to eq(3)
+      end
+    end
+
+    describe "GET /api/v0/tempests" do
+      before(:all) do
+        get '/api/v0/tempests'
+        @parsed_body = JSON.parse(last_response.body)
+      end
+
+      it "should respond to GET /" do
+        expect(last_response).to be_ok
+      end
+
+      it "should return the list of base tempests" do
+        expect(@parsed_body['bases'].empty?).to be(false)
       end
 
       it "should return the list of tempest suffixes" do
         expect(@parsed_body['suffixes'].empty?).to be(false)
+      end
+    end
+
+    describe "GET /api/v1/current_tempests" do
+      before(:all) do
+        get '/api/v1/current_tempests'
+        @parsed_body = JSON.parse(last_response.body)
+        @test_map = 'crypt'
+      end
+
+      it "should respond to GET /" do
+        expect(last_response).to be_ok
+      end
+
+      it "should have the name of active tempests" do
+        expect(@parsed_body[@test_map]['name']).to_not be_nil
+      end
+
+      it "should have the base of active tempests" do
+        expect(@parsed_body[@test_map]['base']).to_not be_nil
+      end
+
+      it "should have the suffix of active tempests" do
+        expect(@parsed_body[@test_map]['suffix']).to_not be_nil
+      end
+
+      it "should have the number of votes of active tempests" do
+        expect(@parsed_body[@test_map]['votes']).to_not be_nil
+      end
+
+      it "should have the type of active tempests" do
+        expect(@parsed_body[@test_map]['type']).to_not be_nil
+      end
+
+      it "should not have anything else" do
+        expect(@parsed_body[@test_map].keys.length).to eq(5)
       end
     end
   end
