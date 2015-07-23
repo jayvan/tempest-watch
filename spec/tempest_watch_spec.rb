@@ -118,5 +118,40 @@ describe "TempestWatch" do
         expect(@parsed_body[@test_map].keys.length).to eq(5)
       end
     end
+
+    describe "GET /api/v1/current_tempests/:map_name" do
+      before(:all) do
+        get '/api/v1/current_tempests/crypt'
+        @parsed_body = JSON.parse(last_response.body)
+      end
+
+      it "should respond to GET /" do
+        expect(last_response).to be_ok
+      end
+
+      it "should have the name of active tempests" do
+        expect(@parsed_body['name']).to_not be_nil
+      end
+
+      it "should have the base of active tempests" do
+        expect(@parsed_body['base']).to_not be_nil
+      end
+
+      it "should have the suffix of active tempests" do
+        expect(@parsed_body['suffix']).to_not be_nil
+      end
+
+      it "should have the number of votes of active tempests" do
+        expect(@parsed_body['votes']).to_not be_nil
+      end
+
+      it "should have the type of active tempests" do
+        expect(@parsed_body['type']).to_not be_nil
+      end
+
+      it "should not have anything else" do
+        expect(@parsed_body.keys.length).to eq(5)
+      end
+    end
   end
 end

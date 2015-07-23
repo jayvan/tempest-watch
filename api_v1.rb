@@ -58,7 +58,13 @@ class TempestWatch < Sinatra::Base
         body "Map #{params[:map]} does not exist"
       else
         status 200
-        body map.tempest.to_json(with_votes: true, with_type: true)
+        body({
+          name: map.tempest.name,
+          base: map.tempest.base,
+          suffix: map.tempest.suffix,
+          votes: map.tempest.votes,
+          type: map.tempest.type
+        }.to_json)
       end
     end
   end
