@@ -36,7 +36,48 @@ Contributions to this project are always welcome. If you have a great idea that 
 Collaborations are great too, if you are thinking of making a tool that interacts with Tempest Tracker (e.g. an AutoHotkey macro), and need a new API or feature open an issue and I'll get it added.
 
 ## API
-The API is not final. Until we know exactly how tempests work, expect there to be some changes to the API including the routes and the return formats. If you are working on tools that integrate with tempest-watch just be aware these are subject to change until a few days after the awakening has released! V1 of the API will be stable.
+Version 0 of the API is final. It will not be changed. Version 1 of the API may change until it is marked final.
+
+### V1
+V1 is identical to V0 except for the `current_tempest` routes.
+
+#### Current Tempests
+Type is one of 'great', 'dangerous', or ''
+
+__GET: http://poetempest.com/api/v1/current_tempests__
+```json
+{
+  "crypt": {
+    "name": "Abyssal Tempest of Animation",
+    "base": "100% of damage is converted to chaos damage",
+    "suffix": "Nearby weapons are animated",
+    "votes": 18,
+    "type": "dangerous"
+  },
+  "desert": {
+    "name": "unknown",
+    "base": "If you enter this map please report which tempest is active",
+    "suffix": "",
+    "votes": 0,
+    "type": ""
+  }
+}
+```
+
+#### Current Tempest for Single Map
+__GET: http://poetempest.com/api/v0/current_tempests/:map__
+```json
+{
+  "name": "Abyssal Tempest of Animation",
+  "base": "100% of damage is converted to chaos damage",
+  "suffix": "Nearby weapons are animated",
+  "votes": 12,
+  "type": "dangerous"
+}
+```
+
+### V0
+V0 is final, it will not be changed.
 
 #### Vote
 __POST: http://poetempest.com/api/v0/vote__
