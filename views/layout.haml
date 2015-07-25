@@ -50,7 +50,7 @@
         $('select').material_select();
         $('ul.tabs').tabs();
 
-        var reportForm = $('#report form') ;
+        var reportForm = $('.report') ;
 
         window.vote = function(map, base, suffix) {
           $.post('api/v0/vote',
@@ -85,12 +85,13 @@
         reportForm.submit(function(e) {
           e.preventDefault();
 
-          if (reportForm.serializeArray().length != 3) {
+          if ($(this).serializeArray().length != 3) {
             return;
           }
-          var map = $('#report form [name=map]').val()
-          var base = $('#report form [name=base]').val()
-          var suffix = $('#report form [name=suffix]').val()
+          var map = $(this).find('[name=map]').val()
+          var base = $(this).find('[name=base]').val()
+          var suffix = $(this).find('[name=suffix]').val()
+          console.log(map, base, suffix);
           vote(map, base, suffix)
         });
 
