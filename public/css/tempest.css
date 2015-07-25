@@ -17,13 +17,14 @@ i {
 th,
 td {
   padding: 10px 20px;
+  position: relative;
 }
 
 tr {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-tr:nth-child(2n) {
+tr:nth-child(4n), tr:nth-child(4n-1) {
   background-color: rgba(0, 0, 0, 0.0);
 }
 
@@ -51,4 +52,9 @@ tr.none {
   border-radius: 2px;
   padding: 0.1rem 0.5rem;
   font-weight: bold;
+}
+
+.map-report {
+  display: none;
+  background-color: #FFF;
 }

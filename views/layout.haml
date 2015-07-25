@@ -76,8 +76,10 @@
           $('.caret').remove();
           $('select').material_select();
 
-          $('ul.tabs').tabs('select_tab', 'report');
-          Materialize.toast('Please select the correct tempest and send the report.', 4000)
+          form = $('.'+map+'-report').show();
+
+          // $('ul.tabs').tabs('select_tab', 'report');
+          // Materialize.toast('Please select the correct tempest and send the report.', 4000)
         };
 
         reportForm.submit(function(e) {
