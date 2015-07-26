@@ -55,13 +55,15 @@
         - tempest = map.tempest
         %tr{:class => tempest.type}
           %td
-            -# if tempest.base_name != 'unknown'
-            %a{onclick: "vote('#{map.name}','#{tempest.base_name}','#{tempest.suffix_name}')"}
-              %i.material-icons thumb_up
+            - if tempest.base_name != 'unknown'
+              %a{onclick: "vote('#{map.name}','#{tempest.base_name}','#{tempest.suffix_name}')"}
+                %i.material-icons thumb_up
           %td
-            -# if tempest.base_name != 'unknown'
             %a{onclick: "downvote('#{map.name}','#{tempest.base_name}','#{tempest.suffix_name}')"}
-              %i.material-icons thumb_down
+              - if tempest.base_name == 'unknown'
+                %i.plus +
+              - else
+                %i.material-icons thumb_down
           %td
             = "#{titleize(map.name)} (#{map.level})"
           %td.hide-on-small-and-down

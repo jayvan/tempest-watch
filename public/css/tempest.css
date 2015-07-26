@@ -93,3 +93,9 @@ tr.none {
 .map-form-wrapper {
   display: none;
 }
+
+.plus {
+  font-size: 2.4em;
+  font-style: normal;
+  padding:0 1px;
+}
