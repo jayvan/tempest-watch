@@ -76,6 +76,19 @@ tr.none {
   background-color: rgba(0,0,0,0.55);
 }
 
+.collection {
+  border: 1px solid black;
+}
+
+.collection .collection-item {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: none;
+}
+
+.collection .collection-item:nth-child(2n) {
+  background-color: rgba(255,255,255,0.035)
+}
+
 .votes {
   font-weight: 300;
   font-size: 0.8rem;
