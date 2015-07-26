@@ -72,12 +72,14 @@
           $('#report form [name=base]').val(base)
           $('#report form [name=suffix]').val(suffix)
 
+          $('.map-form-wrapper form').clone(true, true).appendTo('.'+map+'-report td');
+          $('.'+map+'-report [name=map]').val(map)
+          $('.'+map+'-report').show();
+
           // Babysit materialize >_>
           $('select').material_select('destroy');
           $('.caret').remove();
           $('select').material_select();
-
-          form = $('.'+map+'-report').show();
 
           // $('ul.tabs').tabs('select_tab', 'report');
           // Materialize.toast('Please select the correct tempest and send the report.', 4000)

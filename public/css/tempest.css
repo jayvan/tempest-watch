@@ -89,3 +89,7 @@ tr.none {
 .map-report {
   display: none;
 }
+
+.map-form-wrapper {
+  display: none;
+}

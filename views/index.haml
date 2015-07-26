@@ -71,24 +71,26 @@
           %td.hide-on-small-and-down= tempest.description
         %tr{:class => "#{map.name}-report map-report"}
           %td{:colspan => 6}
-            .please-report Please select the correct tempest and send the report.
-            %form.report.col.s12{action: 'api/v0/vote', method: 'post', 'data-remote' => true}
-              %input{type: 'hidden', value: map.name, name: 'map'}
-              .input-field.col.s12
-                %select{name: 'base'}
-                  %option{value: '', disabled: true, selected: true}
-                  - @tempest_bases.each do |key, base|
-                    %option{value: key}= titleize(key)
-                %label Tempest
-              .input-field.col.s12
-                %select{name: 'suffix'}
-                  %option{value: '', disabled: true, selected: true}
-                  - @tempest_suffixes.each do |key, suffix|
-                    %option{value: key}= titleize(key)
-                %label Suffix
-              .input-field.col.s12
-                %button.btn.waves-effect.waves-light{type: 'submit', name: 'action'}
-                  Send
+
+  .map-form-wrapper
+    %form.report.col.s12{action: 'api/v0/vote', method: 'post', 'data-remote' => true}
+      .please-report Please select the correct tempest and send the report.
+      %input{type: 'hidden', name: 'map'}
+      .input-field.col.s12
+        %select{name: 'base'}
+          %option{value: '', disabled: true, selected: true}
+          - @tempest_bases.each do |key, base|
+            %option{value: key}= titleize(key)
+        %label Tempest
+      .input-field.col.s12
+        %select{name: 'suffix'}
+          %option{value: '', disabled: true, selected: true}
+          - @tempest_suffixes.each do |key, suffix|
+            %option{value: key}= titleize(key)
+        %label Suffix
+      .input-field.col.s12
+        %button.btn.waves-effect.waves-light{type: 'submit', name: 'action'}
+          Send
 
 #more
   %p
