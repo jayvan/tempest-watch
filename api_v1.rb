@@ -42,8 +42,8 @@ class TempestWatch < Sinatra::Base
       current_tempests.each do |map, tempest|
         tempests[map] = {
           name: tempest.name,
-          base: tempest.base,
-          suffix: tempest.suffix,
+          base: tempest.base_name,
+          suffix: tempest.suffix_name,
           votes: tempest.votes,
           type: tempest.type
         }
@@ -60,8 +60,8 @@ class TempestWatch < Sinatra::Base
         status 200
         body({
           name: map.tempest.name,
-          base: map.tempest.base,
-          suffix: map.tempest.suffix,
+          base: map.tempest.base_name,
+          suffix: map.tempest.suffix_name,
           votes: map.tempest.votes,
           type: map.tempest.type
         }.to_json)

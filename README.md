@@ -39,7 +39,7 @@ Collaborations are great too, if you are thinking of making a tool that interact
 Version 0 of the API is final. It will not be changed. Version 1 of the API may change until it is marked final.
 
 ### V1
-V1 is identical to V0 except for the `current_tempest` routes.
+V1 is identical to V0 except for the `current_tempest` routes. For the `current_tempest` routes the numbers of votes and type of tempests are added. Furthermore, instead of having the full description of the tempest, `base` and `suffix` are the names of the base and suffix. You can look up what they mean using the `/tempests` api call.
 
 #### Current Tempests
 Type is one of 'great', 'dangerous', or ''
@@ -49,15 +49,15 @@ __GET: http://poetempest.com/api/v1/current_tempests__
 {
   "crypt": {
     "name": "Abyssal Tempest of Animation",
-    "base": "100% of damage is converted to chaos damage",
-    "suffix": "Nearby weapons are animated",
+    "base": "abyssal",
+    "suffix": "animation",
     "votes": 18,
     "type": "dangerous"
   },
   "desert": {
     "name": "unknown",
-    "base": "If you enter this map please report which tempest is active",
-    "suffix": "",
+    "base": "unknown",
+    "suffix": "none",
     "votes": 0,
     "type": ""
   }
