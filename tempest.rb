@@ -41,7 +41,7 @@ class Tempest
 
   BASES = {
     'none' => 'No tempest is active in this area',
-    'abyssal' => '100% of damage is converted to chaos damage',
+    'abyssal' => '50% of damage is converted to chaos damage',
     'arctic' => 'Casts various ice spells',
     'battering' => 'Casts various physical spells',
     'blasphemous' => 'Casts curses',
