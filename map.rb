@@ -109,6 +109,7 @@ class Map
     'bazaar' => 77,
     'necropolis' => 77,
     'plateau' => 77,
+    'volcano' => 77,
     'academy' => 78,
     'crematorium' => 78,
     'precinct' => 78,
@@ -127,7 +128,6 @@ class Map
     'shrine' => 81,
     'vaal_temple' => 81,
     'colosseum' => 82,
-    'core' => 82,
-    'volcano' => 82
+    'core' => 82
   }
 end
