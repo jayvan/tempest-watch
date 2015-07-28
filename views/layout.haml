@@ -57,23 +57,25 @@
           $.post('api/v0/vote',
             { map: map, base: base, suffix: suffix },
             function(data) {
-              reportForm[0].reset();
-              $('ul.tabs').tabs('select_tab', 'maps');
-              // Babysit materialize >_>
-              $('select').material_select('destroy');
-              $('.caret').remove();
-              $('select').material_select();
+              $('.'+map+'-report').hide();
               Materialize.toast('Thank you, your tempest sighting has been logged.', 4000)
             });
         };
 
         window.downvote = function(map, base, suffix) {
-          $('#report form [name=map]').val(map)
-          $('#report form [name=base]').val(base)
-          $('#report form [name=suffix]').val(suffix)
+          currentMap = $('#vote [name=map]').val()
+          if (currentMap.length > 0) {
+            $('.'+currentMap+'-report').hide();
+            if (currentMap == map) {
+              return;
+            }
+          }
+          $('#vote [name=map]').val(map)
+          $('#vote [name=base]').val(base)
+          $('#vote [name=suffix]').val(suffix)
 
-          $('.map-form-wrapper form').clone(true, true).appendTo('.'+map+'-report td');
-          $('.'+map+'-report [name=map]').val(map)
+          $('#vote').show().detach().appendTo('.'+map+'-report td');
+
           $('.'+map+'-report').show();
 
           // Babysit materialize >_>
@@ -81,8 +83,7 @@
           $('.caret').remove();
           $('select').material_select();
 
-          // $('ul.tabs').tabs('select_tab', 'report');
-          // Materialize.toast('Please select the correct tempest and send the report.', 4000)
+          Materialize.toast('Please select the correct tempest and send the report.', 4000)
         };
 
         reportForm.submit(function(e) {

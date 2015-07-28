@@ -92,6 +92,7 @@ tr.none {
 
 .map-form-wrapper {
   display: none;
+  padding: 0 2rem;
 }
 
 .plus {
