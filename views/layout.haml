@@ -51,45 +51,51 @@
         $('select').material_select();
         $('ul.tabs').tabs();
 
-        var reportForm = $('#report form') ;
+        var reportForm = $('.report') ;
 
         window.vote = function(map, base, suffix) {
           $.post('api/v0/vote',
             { map: map, base: base, suffix: suffix },
             function(data) {
-              reportForm[0].reset();
-              $('ul.tabs').tabs('select_tab', 'maps');
-              // Babysit materialize >_>
-              $('select').material_select('destroy');
-              $('.caret').remove();
-              $('select').material_select();
+              $('.'+map+'-report').hide();
               Materialize.toast('Thank you, your tempest sighting has been logged.', 4000)
             });
         };
 
         window.downvote = function(map, base, suffix) {
-          $('#report form [name=map]').val(map)
-          $('#report form [name=base]').val(base)
-          $('#report form [name=suffix]').val(suffix)
+          currentMap = $('#vote [name=map]').val()
+          if (currentMap.length > 0) {
+            $('.'+currentMap+'-report').hide();
+            if (currentMap == map) {
+              return;
+            }
+          }
+          $('#vote [name=map]').val(map)
+          $('#vote [name=base]').val(base)
+          $('#vote [name=suffix]').val(suffix)
+
+          $('#vote').show().detach().appendTo('.'+map+'-report td');
+
+          $('.'+map+'-report').show();
 
           // Babysit materialize >_>
           $('select').material_select('destroy');
           $('.caret').remove();
           $('select').material_select();
 
-          $('ul.tabs').tabs('select_tab', 'report');
           Materialize.toast('Please select the correct tempest and send the report.', 4000)
         };
 
         reportForm.submit(function(e) {
           e.preventDefault();
 
-          if (reportForm.serializeArray().length != 3) {
+          if ($(this).serializeArray().length != 3) {
             return;
           }
-          var map = $('#report form [name=map]').val()
-          var base = $('#report form [name=base]').val()
-          var suffix = $('#report form [name=suffix]').val()
+          var map = $(this).find('[name=map]').val()
+          var base = $(this).find('[name=base]').val()
+          var suffix = $(this).find('[name=suffix]').val()
+          console.log(map, base, suffix);
           vote(map, base, suffix)
         });
 

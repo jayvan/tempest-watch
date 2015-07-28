@@ -4,34 +4,7 @@
       %li.tab.col.s4
         %a{href: '#maps'} Maps
       %li.tab.col.s4
-        %a{href: '#report'} Report
-      %li.tab.col.s4
         %a{href: '#more'} More
-
-#report
-  .row
-    %form.col.s12{action: 'api/v0/vote', method: 'post', 'data-remote' => true}
-      .input-field.col.s12
-        %select{name: 'map'}
-          %option{value: '', disabled: true, selected: true}
-          - @maps.each do |map|
-            %option{value: map.name}= "#{titleize(map.name)} (#{map.level})"
-        %label Map
-      .input-field.col.s12
-        %select{name: 'base'}
-          %option{value: '', disabled: true, selected: true}
-          - @tempest_bases.each do |key, base|
-            %option{value: key}= titleize(key)
-        %label Tempest
-      .input-field.col.s12
-        %select{name: 'suffix'}
-          %option{value: '', disabled: true, selected: true}
-          - @tempest_suffixes.each do |key, suffix|
-            %option{value: key}= titleize(key)
-        %label Suffix
-      .input-field.col.s12
-        %button.btn.waves-effect.waves-light.teal.darken-2{type: 'submit', name: 'action'}
-          Send
 
 #maps
   .row
@@ -59,8 +32,10 @@
               %a{onclick: "vote('#{map.name}','#{tempest.base_name}','#{tempest.suffix_name}')"}
                 %i.material-icons thumb_up
           %td
-            - if tempest.base_name != 'unknown'
-              %a{onclick: "downvote('#{map.name}','#{tempest.base_name}','#{tempest.suffix_name}')"}
+            %a{onclick: "downvote('#{map.name}','#{tempest.base_name}','#{tempest.suffix_name}')"}
+              - if tempest.base_name == 'unknown'
+                %i.plus +
+              - else
                 %i.material-icons thumb_down
           %td
             = "#{titleize(map.name)} (#{map.level})"
@@ -69,6 +44,27 @@
               %span.votes= tempest.votes
           %td= tempest.name
           %td.hide-on-small-and-down= tempest.description
+        %tr{:class => "#{map.name}-report map-report"}
+          %td{:colspan => 6}
+
+  #vote.map-form-wrapper.row
+    %form.report.col.s12{action: 'api/v0/vote', method: 'post', 'data-remote' => true}
+      %input{type: 'hidden', name: 'map'}
+      .input-field.col.s12
+        %select{name: 'base'}
+          %option{value: '', disabled: true, selected: true}
+          - @tempest_bases.each do |key, base|
+            %option{value: key}= titleize(key)
+        %label Tempest
+      .input-field.col.s12
+        %select{name: 'suffix'}
+          %option{value: '', disabled: true, selected: true}
+          - @tempest_suffixes.each do |key, suffix|
+            %option{value: key}= titleize(key)
+        %label Suffix
+      .input-field.col.s12
+        %button.btn.waves-effect.waves-light{type: 'submit', name: 'action'}
+          Send
 
 #more
   %p Here are more ways you can get poetempest information, or report tempests
