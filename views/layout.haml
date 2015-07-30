@@ -65,7 +65,7 @@
         window.downvote = function(map, base, suffix) {
           currentMap = $('#vote [name=map]').val()
           if (currentMap.length > 0) {
-            $('.'+currentMap+'-report').hide();
+            $('.'+currentMap+'-report').toggle();
             if (currentMap == map) {
               return;
             }
