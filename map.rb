@@ -35,7 +35,7 @@ class Map
   def report_tempest(tempest, voter, seconds_to_reset, skip_validation = false)
     unless skip_validation
       # Check per map voting limits
-      voter_key = "#map::{@name}::#{voter}"
+      voter_key = "map::#{@name}::#{voter}"
       return if $redis.exists voter_key
       $redis.set voter_key, 1
       $redis.expire voter_key, seconds_to_reset
