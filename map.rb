@@ -34,10 +34,21 @@ class Map
   # Increments the tempests counter in the maps SortedSet
   def report_tempest(tempest, voter, seconds_to_reset, skip_validation = false)
     unless skip_validation
-      voter_key = "#{@name}::#{voter}"
+      # Check per map voting limits
+      voter_key = "#map::{@name}::#{voter}"
       return if $redis.exists voter_key
       $redis.set voter_key, 1
       $redis.expire voter_key, seconds_to_reset
+
+      # Check global voting limits
+      global_voter_key = "total_votes::#{voter}"
+      $redis.incrby global_voter_key, 1
+      hourly_votes = $redis.get(global_voter_key).to_i
+      $redis.expire global_voter_key, seconds_to_reset
+      if hourly_votes >= 10
+        $redis.set("banned::#{voter}", 1)
+      end
+      return if $redis.get("banned::#{voter}")
     end
 
     base_key = base_redis_key
