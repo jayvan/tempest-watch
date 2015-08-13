@@ -68,7 +68,6 @@ class Map
     'grotto' => 68,
     'pit' => 68,
     'tropical_island' => 68,
-    'aqueduct' => 69,
     'arcade' => 69,
     'cemetery' => 69,
     'channel' => 69,
