@@ -85,6 +85,7 @@ class Map
     'vaal_pyramid' => 70,
     'arena' => 71,
     'overgrown_shrine' => 71,
+    'phantasmagoria' => 71,
     'promenade' => 71,
     'shore' => 71,
     'spider_forest' => 71,
