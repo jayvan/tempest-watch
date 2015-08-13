@@ -4,6 +4,9 @@ class Tempest
   def initialize(base, suffix, votes = 0)
     @base_name = base || 'unknown'
     @suffix_name = suffix || 'none'
+    if @base_name == 'none'
+      @suffix_name = 'none'
+    end
     @base = BASES[base] || UNKNOWN_BASE
     @suffix = SUFFIXES[@suffix_name]
     @votes = votes
