@@ -29,11 +29,11 @@ class Tempest
   def type
     if %w(radiating shining corrupting).include? @base_name
       'great'
-    elsif %w(destiny fate fortune incursion phantoms radiating revelation turmoil).include? @suffix_name
+    elsif %w(destiny fate fortune phantoms radiating revelation turmoil).include? @suffix_name
       'great'
     elsif %w(abyssal veiling).include? @base_name
       'dangerous'
-    elsif %w(aberrance).include? @suffix_name
+    elsif %w(aberrance incursion).include? @suffix_name
       'dangerous'
     else
       ''
