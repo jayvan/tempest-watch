@@ -29,7 +29,7 @@ class Tempest
   def type
     if %w(radiating shining corrupting).include? @base_name
       'great'
-    elsif %w(destiny fate fortune phantoms radiating revelation turmoil).include? @suffix_name
+    elsif %w(destiny fate fortune incursion phantoms radiating revelation turmoil).include? @suffix_name
       'great'
     elsif %w(abyssal veiling).include? @base_name
       'dangerous'
@@ -45,6 +45,7 @@ class Tempest
   BASES = {
     'none' => 'No tempest is active in this area',
     'abyssal' => '50% of damage is converted to chaos damage',
+    'arcane' => 'Grants increased Elemental Damage and Cast Speed, and regenerates life upon casting spells',
     'arctic' => 'Casts various ice spells',
     'battering' => 'Casts various physical spells',
     'blasphemous' => 'Casts curses',
@@ -68,10 +69,13 @@ class Tempest
     'molten' => 'Casts various fire spells',
     'morbid' => 'Summons vaal skeletons, raging spirits, and casts desecrate',
     'obscuring' => 'Creates a cloud of smoke that blinds enemies and gives a temporary buff to movement speed',
+    'poisonous' => 'Creates poison clouds at the location of the Tempests',
     'quickening' => '30% increased attack speed, 30% increased cast speed, 30% increased movement speed',
     'radiating' => 'When hit, monsters have 1200% increased drop rarity, and 600% increased drop quantity, players have 420% increased rarity and 70% increased item quantity',
     'refining' => 'Quality drops',
+    'resisting' => 'You cannot be Chilled, Frozen, Ignited or Shocked and you have additional Elemental and maximum Elemental Resistances',
     'restorative' => '10% of Mana Regenerated per second, 10% of Life regenerated per second',
+    'revealing' => 'Items you find are identified',
     'scathing' => 'All hits are Critical Strikes, extra gore',
     'seething' => 'gain 50% of physical damage as fire damage, 50% increased fire damage, always ignite',
     'sharding' => '4 additional projectiles, 30%increased radius of area skills',
@@ -93,7 +97,7 @@ class Tempest
     'animation' => 'Nearby weapons are animated',
     'cataclysm' => '50% reduced tempest lifetime, 40% increased tempst frequency',
     'combustion' => 'Area has patches of burning ground, +25% monster fire resistance',
-    'contamination' => 'Area has patches of desecrated ground, monsters poison on hit',
+    'contamination' => 'Area has patches of desecrated ground, monsters poison on hit, monsters add 10% of their physical damage as chaos damage',
     'desperation' => '40% increased tempest buff duration when on low life',
     'destiny' => 'Random monster drops a map',
     'fate' => 'Random monster drops a vaal fragment',
@@ -101,6 +105,7 @@ class Tempest
     'fortune' => 'Random monster drops a unique item',
     'fulmination' => 'Area has patches of shocking ground, +15% monster lightning resistance',
     'ice' => 'Area has patched of chilled ground, +25% monster cold resistance',
+    'incursion' => 'Adds 10 Invasion Bosses',
     'influence' => '50% increased tempest area of effect',
     'inspiration' => '15% increased experience gain',
     'intensity' => '50% increased tempest frequency, 25% reduced tempest buff duration',
