@@ -1,0 +1,115 @@
+html {
+  color: #DEDEDE;
+  background-color: #080808;
+}
+
+header {
+  margin-bottom: 10px;
+}
+
+nav, footer.page-footer {
+  background-color: #333333;
+}
+
+.tabs {
+  color: #FF1616;
+  background-color: #080808;
+}
+
+.tabs .tab a {
+  color: #26A69A;
+}
+
+.tabs .tab a:hover {
+  color: #4DB5AC;
+}
+
+.tabs .indicator {
+  background-color: #26A69A;
+}
+
+a {
+  color: #26A69A;
+}
+
+i {
+  cursor: pointer;
+}
+
+table {
+  background-color: #181818;
+}
+th,
+td {
+  padding: 10px 15px;
+}
+
+tr {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+tr:nth-child(4n), tr:nth-child(4n-1) {
+  background-color: rgba(255,255,255,0.035)
+}
+
+tr.dangerous {
+  background-color: rgba(240, 5, 17, 0.2);
+}
+
+tr.great {
+  background-color: rgba(127, 242, 38, 0.3);
+}
+
+tr.none {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.toast {
+  background-color: #00796B;
+}
+
+.dropdown-content {
+  background-color: #333333;
+}
+
+.dropdown-content li:hover, .dropdown-content li.active {
+  background-color: rgba(0,0,0,0.55);
+}
+
+.collection {
+  border: 1px solid black;
+}
+
+.collection .collection-item {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: none;
+}
+
+.collection .collection-item:nth-child(2n) {
+  background-color: rgba(255,255,255,0.035)
+}
+
+.votes {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #26a69a;
+  border-radius: 2px;
+  padding: 0.1rem 0.5rem;
+  font-weight: bold;
+}
+
+.map-report {
+  display: none;
+}
+
+.map-form-wrapper {
+  display: none;
+  padding: 0 2rem;
+}
+
+.plus {
+  font-size: 2.4em;
+  font-style: normal;
+  padding:0 1px;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tempest Watch</title>
+    <link href='css/materialize.min.css' media='screen,projection' rel='stylesheet' type='text/css'>
+    <link href='css/tempest.css' media='screen,projection' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <meta content='Path of Exile tempest tempest tracker. See what tempests are in each map and report tempest sightings' name='description'>
+  </head>
+  <body>
+    <header>
+      <div class='navbar-fixed'>
+        <nav>
+          <div class='nav-wrapper container'>
+            <a class='brand-logo' href='#'>Tempest Watch</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class='container'>
+        <div id='conclusion'>
+          <h2>Thank you Tempest Trackers!</h1>
+          <p>The Tempest league has come to an end. Here's a look at what we accomplished...</p>
+          <li>The homepage was loaded 3 054 482 times.</li>
+          <li>270 917 unique people visited.</li>
+          <li>100 954 tempest reports were made</li>
+          <li>110 users auto banned for griefing (my apologies again to anyone innocently blocked)</li>
+
+          <h4>Contributors</h4>
+          <p>I'd like to thank everyone who made contributions to the project</p>
+          <li><a href="https://github.com/MMcCormick">Matt McCormick (MMcCormick)</a></li>
+          <li><a href="https://github.com/NilkemoryaOryhara">NikemoryaOryhara</a></li>
+          <li><a href="https://github.com/pajlada">https://github.com/pajlada</a></li>
+          <li>Everyone who provided feedback and suggestions in game, on reddit, by email, and GitHub</li>
+          <li>Everyone who voted!</li>
+
+          <p>I hope you all had a great time with the challenge leagues. If you did, consider purchasing a <a href="https://www.pathofexile.com/purchase">supporter pack</a> so GGG can keep developing great content for years to come.</p>
+        </div>
+      </div>
+    </main>
+    <footer class='page-footer'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col l6 s12'>
+            <p class='grey-text text-lighten-4'>
+              This site is fan-made and is not affiliated with Grinding Gear Games in any way.
+            </p>
+            <p class='grey-text text-lighten-4'>
+              Developed by Justin Vanderheide
+            </p>
+            <p class='grey-text text-lighten-4'>
+              Contribute on
+              <a class='blue-text text-darken-3' href='https://github.com/jayvan/tempest-watch'>GitHub</a>
+            </p>
+          </div>
+          <div class='col l6 s12'>
+            <h5 class='white-text'>Built with</h5>
+            <ul>
+              <li>
+                <a class='blue-text text-darken-3' href='http://materializecss.com/'>Materialize</a>
+              </li>
+              <li>
+                <a class='blue-text text-darken-3' href='http://redis.io/'>Redis</a>
+              </li>
+              <li>
+                <a class='blue-text text-darken-3' href='http://www.sinatrarb.com/'>Sinatra</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src='js/jquery-2.1.4.min.js' type='text/javascript'></script>
+    <script src='js/materialize.min.js' type='text/javascript'></script>
+    <script>
+      $(document).ready(function() {
+        // Setup materialize nonsense
+        $('select').material_select();
+        $('ul.tabs').tabs();
+
+        var reportForm = $('.report') ;
+
+        window.vote = function(map, base, suffix) {
+          $.post('api/v0/vote',
+            { map: map, base: base, suffix: suffix },
+            function(data) {
+              $('.'+map+'-report').hide();
+              Materialize.toast('Thank you, your tempest sighting has been logged.', 4000)
+            });
+        };
+
+        window.downvote = function(map, base, suffix) {
+          currentMap = $('#vote [name=map]').val()
+          if (currentMap.length > 0) {
+            $('.'+currentMap+'-report').toggle();
+            if (currentMap == map) {
+              return;
+            }
+          }
+          $('#vote [name=map]').val(map)
+          $('#vote [name=base]').val(base)
+          $('#vote [name=suffix]').val(suffix)
+
+          $('#vote').show().detach().appendTo('.'+map+'-report td');
+
+          $('.'+map+'-report').show();
+
+          // Babysit materialize >_>
+          $('select').material_select('destroy');
+          $('.caret').remove();
+          $('select').material_select();
+
+          Materialize.toast('Please select the correct tempest and send the report.', 4000)
+        };
+
+        reportForm.submit(function(e) {
+          e.preventDefault();
+
+          if ($(this).serializeArray().length != 3) {
+            return;
+          }
+          var map = $(this).find('[name=map]').val()
+          var base = $(this).find('[name=base]').val()
+          var suffix = $(this).find('[name=suffix]').val()
+          console.log(map, base, suffix);
+          vote(map, base, suffix)
+        });
+
+        var refreshHeader = $('#countdown')
+        var minuteSpan = $('#minutes-left');
+        var secondSpan = $('#seconds-left');
+
+        // Set up the countdown
+        var resetTime = new Date(Date.now() + 3365000);
+        var timerUpdate = setInterval(function() {
+          var secondsToReset = Math.floor((resetTime - Date.now()) / 1000);
+          if (secondsToReset < 0) {
+            // Refresh 0-10 seconds from now to distribute reloads
+            // Otherwise every connected browsers hits the server simultaneously
+            window.setTimeout(function() {
+              window.location.reload();
+            }, Math.random() * 10000);
+
+            refreshHeader.text('Refreshing...');
+            clearInterval(timerUpdate);
+            return;
+          }
+          var minutesLeft = Math.floor(secondsToReset / 60);
+          var secondsLeft = secondsToReset - minutesLeft * 60;
+          var secondsLeftPadded = ("0" + secondsLeft).slice(-2);
+          minuteSpan.text(minutesLeft);
+          secondSpan.text(secondsLeftPadded);
+        }, 100);
+      });
+    </script>
+  </body>
+</html>
